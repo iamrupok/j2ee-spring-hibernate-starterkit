@@ -5,12 +5,12 @@
 
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <title>Employee Homepage</title>
-<link rel="stylesheet" type="text/css" href="http://174.143.89.49/projects/DHS/demandbridge/dbc/css/reset.css"/>
+<link rel="stylesheet" type="text/css" href="../resources/style/reset.css"/>
 
 <link rel="stylesheet" type="text/css" href="../extjs/resources/css/ext-all.css" />
 <link rel="stylesheet" type="text/css"   href="../extjs/resources/css/xtheme-gray.css" />
-<link rel="stylesheet" type="text/css" href="http://174.143.89.49/projects/DHS/demandbridge/dbc/css/forms.css"/>	
-<link rel="stylesheet" type="text/css" href="http://174.143.89.49/projects/DHS/demandbridge/dbc/css/site.css"/>
+<link rel="stylesheet" type="text/css" href="../resources/style/forms.css"/>	
+<link rel="stylesheet" type="text/css" href="../resources/style/site.css"/>
 
 <script type="text/javascript" src="../extjs/adapter/ext/ext-base.js"></script>
 <script type="text/javascript" src="../extjs/ext-all.js"></script>
@@ -22,8 +22,4 @@
 
 </head>
 <body class="innerBody">
-<
-<div class="wrapper">
- <div class="header">
-    <p>Employee Starter Kit</p>
-  </div>
+<form>
