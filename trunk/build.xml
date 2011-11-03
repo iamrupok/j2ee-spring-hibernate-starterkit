@@ -1,0 +1,181 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project name="ekit" default="autodeploy" basedir=".">
+
+	<property file="build.properties" />    
+
+	<!-- set global properties for this build -->
+	<property name="srcdir" location="${basedir}/src" />
+	<property name="webdir" location="${basedir}/web" />
+	<property name="build" location="${basedir}/build" />
+	<property name="dist" location="${basedir}/dist" />
+	<property name="libdir" location="${basedir}/lib" />
+	<property name="extlibdir" location="${basedir}/extlib" />
+
+	
+	<!-- 
+	<taskdef name="deploy" classname="org.apache.catalina.ant.DeployTask" /> 
+	<taskdef name="undeploy" classname="org.apache.catalina.ant.UndeployTask" />
+	-->
+
+	<!-- PATHS -->
+	<path id="buildlibs">
+		<pathelement location="${weblogic.jar}"/>
+		<pathelement location="${rt.jar}"/>
+	</path>
+
+	<taskdef name="wldeploy" classname="weblogic.ant.taskdefs.management.WLDeploy" classpathref="buildlibs" />
+	
+	<fileset dir="src">
+		<include name="**/*.java" />
+		<exclude name="**/*Test.java" />
+	</fileset>
+
+	<target name="init">
+		<!-- Create the time stamp -->
+		<tstamp />
+		<!-- Create the build directory structure used by compile -->
+		<mkdir dir="${build}/web" />
+		<mkdir dir="${dist}/lib" />
+		<mkdir dir="${build}/jar" />
+	</target>
+
+	<target name="compileJar" depends="init" description="compile the source ">
+		<!-- Compile the java code from ${src} into ${build} -->
+		<javac srcdir="${srcdir}" destdir="${build}/jar" excludes="**/*Test.java" debug="true">
+
+			<classpath>
+				<fileset dir="${libdir}">
+					<include name="**/*.jar" />
+				</fileset>
+			</classpath>
+		</javac>
+		<jar jarfile="${dist}/lib/ekit.jar" basedir="${build}/jar">
+			<fileset dir="${srcdir}/..">
+				<include name="ekitr-spring.xml" />
+			</fileset>
+		</jar>
+	</target>
+
+	<target name="dist" depends="compileJar" description="generate the distribution">
+		<!-- Create the distribution directory -->
+		<mkdir dir="${dist}/lib" />
+
+		<!-- Put everything in ${build} into the MyProject-${DSTAMP}.jar file 
+		<jar jarfile="${dist}/lib/DBVendor-${DSTAMP}.jar" basedir="${build}" />
+		-->
+
+
+	</target>
+
+	<target name="clean" description="clean up">
+		<!-- Delete the ${build} and ${dist} directory trees -->
+		<delete dir="${build}" />
+		<delete dir="${dist}" />
+	</target>
+
+
+
+	<target name="war" depends="dist">
+		<war basedir="web" webxml="web/WEB-INF/web.xml" destfile="${app.name}.war">
+			<lib dir="${dist}/lib" />
+			<lib dir="${libdir}" includes="**/*spring*.jar" excludes="**/spring-webmvc.jar **/spring-ws*.jar **/spring.jar"/>
+			<lib dir="${libdir}" includes="**/*logging*.jar" />
+			<lib dir="${libdir}" includes="**/*lang*.jar" />
+			<lib dir="${libdir}" includes="**/*freemarker*.jar" />
+			<lib dir="${libdir}" includes="**/*acegi*.jar" />
+			<lib dir="${libdir}" includes="**/servlet-api.jar" />
+			<lib dir="${libdir}" includes="**/cas**.jar" />
+			<classes dir="build/web" />
+			<exclude name="**/*.java" />
+			<exclude name="com" />
+			<webinf file="ekit-spring.xml" />
+		</war>
+	</target>
+
+	<target name="localapache" depends="init">
+		<copy todir="${apache.dir}/htdocs/ekit">
+			<fileset dir="web">
+				<include name="**/*.js" />
+				<include name="**/*.css" />
+				<include name="**/*.jpg" />
+				<include name="**/*.gif" />
+				<include name="**/*.png" />
+			</fileset>
+		</copy>
+	</target>
+	
+	<target name="redeploy" depends="clean, localapache, war">
+		<copy file="${app.name}.war" todir="${autodeploy.dir}" />
+	</target>
+
+	<target name="devapache"  depends="init">
+		<zip destfile="${build}/apache.zip">
+			<zipfileset dir="web">
+				<include name="**/*.jpg" />
+				<include name="**/*.gif" />
+				<include name="**/*.png" />
+				<include name="**/*.js" />
+				<include name="**/*.css" />
+			</zipfileset>
+		</zip>
+		<scp keyfile="/root/.ssh/id_rsa" 
+	            passphrase="1q2w3e4r" trust="true" verbose="false"  
+	            todir="root@tron.webbmason:/opt/local/apache/htdocs/ekit">
+			<fileset dir="${build}">
+				<include name="apache.zip" />
+			</fileset>
+		</scp>
+		<sshexec host="tron.webbmason"
+        	keyfile="/root/.ssh/id_rsa"
+        	passphrase="1q2w3e4r" trust="true" verbose="false"
+        	username="root"
+        	command="cd /opt/local/apache/htdocs/ekit;unzip -o apache.zip" />
+	</target>	
+
+	<target name="prodapache" depends="init">
+		<zip destfile="${build}/apache.zip">
+			<zipfileset dir="web">
+				<include name="**/*.jpg" />
+				<include name="**/*.gif" />
+				<include name="**/*.png" />
+				<include name="**/*.js" />
+				<include name="**/*.css" />
+			</zipfileset>
+		</zip>
+		<scp keyfile="/root/.ssh/id_rsa" 
+	            passphrase="1q2w3e4r" trust="true" verbose="false"  
+	            todir="root@asteroids.webbmason:/opt/local/apache/htdocs/ekit">
+			<fileset dir="${build}">
+				<include name="apache.zip" />
+			</fileset>
+		</scp>
+		<sshexec host="asteroids.webbmason"
+    	keyfile="/root/.ssh/id_rsa"
+    	passphrase="1q2w3e4r" trust="true" verbose="false"
+    	username="root"
+    	command="cd /opt/local/apache/htdocs/ekit;unzip -o apache.zip" />
+	</target>
+	
+    <target name="autodeploy" depends="devapache, war">
+            <scp file="${app.name}.war"
+                    keyfile="/root/.ssh/id_rsa"
+                    passphrase="1q2w3e4r"
+                    todir="root@gorf:/opt/local/bea/user_projects/domains/epmonline/autodeploy"/>
+    </target>
+
+	<target name="fixHardCode">
+		<replace dir="${srcdir}/com/ekit/employee/util" value="">
+		  	<include name="**/SiteGlobalUtility.java" />
+			<replacetoken>.development</replacetoken>
+		</replace>	
+		<replace dir="${webdir}/WEB-INF" value="">
+		  	<include name="**/web.xml" />
+			<replacetoken>.development</replacetoken>
+		</replace>	
+    </target>
+	
+	<target name="proddeploy" depends="prodapache, war">
+		<wldeploy name="dbv" action="deploy" verbose="true" debug="true" user="epm" password="letitride" source="${app.name}.war" adminurl="t3://galaga.webbmason:7001" upload="true" />
+    </target>
+    
+</project>
