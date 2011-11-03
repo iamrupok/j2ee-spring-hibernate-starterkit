@@ -1,0 +1,97 @@
+<!DOCTYPE web-app PUBLIC "-//Sun Microsystems, Inc.//DTD Web Application 2.3//EN" "http://java.sun.com/dtd/web-app_2_3.dtd">
+<web-app>
+	<context-param>
+		<param-name>contextConfigLocation</param-name>
+		<param-value>
+			/WEB-INF/ekit-spring.xml 
+			/WEB-INF/ekit-security.xml 
+		</param-value>
+	</context-param>
+
+	<filter>
+		<filter-name>hibernateFilter</filter-name>
+		<filter-class>org.springframework.orm.hibernate3.support.OpenSessionInViewFilter</filter-class>
+		<init-param>
+			<param-name>singleSession</param-name>
+			<param-value>true</param-value>
+		</init-param>
+		<init-param>
+			<param-name>sessionFactoryBeanName</param-name>
+			<param-value>sessionFactory</param-value>
+		</init-param>
+	</filter>
+
+	<filter-mapping>
+	  <filter-name>hibernateFilter</filter-name>
+	  <url-pattern>/*</url-pattern> 
+	</filter-mapping>
+
+<filter>
+    <filter-name>springSecurityFilterChain</filter-name>
+    <filter-class>org.springframework.web.filter.DelegatingFilterProxy</filter-class>
+</filter>
+
+    <filter-mapping>
+      <filter-name>springSecurityFilterChain</filter-name>
+      <url-pattern>/*</url-pattern>
+    </filter-mapping>
+
+	<listener>
+		<listener-class>
+			org.springframework.web.context.ContextLoaderListener
+		</listener-class>
+	</listener>
+
+	<servlet>
+		<servlet-name>AjaxData</servlet-name>
+		<servlet-class>
+			com.demandbridge.vendor.util.AjaxDataServlet
+		</servlet-class>
+	</servlet>
+	
+	<servlet>
+		<servlet-name>ekitweb</servlet-name>
+		<servlet-class>
+			org.springframework.web.servlet.DispatcherServlet
+		</servlet-class>
+		<load-on-startup>1</load-on-startup>
+	</servlet>
+<!-- 	
+  <servlet>
+    <servlet-name>ekit</servlet-name>
+    <servlet-class>com.demandbridge.vendor.profile.VendorServlet</servlet-class>
+  </servlet>
+ -->
+  
+  	<servlet>
+		<servlet-name>spring-ws</servlet-name>
+		<servlet-class>
+			org.springframework.ws.transport.http.MessageDispatcherServlet
+		</servlet-class>
+	</servlet>
+
+	<servlet-mapping>
+		<servlet-name>AjaxData</servlet-name>
+		<url-pattern>/AjaxData</url-pattern>
+	</servlet-mapping>
+
+	<servlet-mapping>
+		<servlet-name>ekitweb</servlet-name>
+		<url-pattern>*.dbv</url-pattern>
+	</servlet-mapping>
+<!--   
+  <servlet-mapping>
+    <servlet-name>ekit</servlet-name>
+    <url-pattern>/ekit</url-pattern>
+  </servlet-mapping>
+ -->
+	<servlet-mapping>
+		<servlet-name>spring-ws</servlet-name>
+		<url-pattern>*.ws</url-pattern>
+	</servlet-mapping>
+
+	
+	<welcome-file-list>
+		<welcome-file>/security/Welcome.dbv</welcome-file>
+	</welcome-file-list>
+</web-app>

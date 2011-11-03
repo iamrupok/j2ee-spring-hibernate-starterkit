@@ -1,0 +1,114 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:p="http://www.springframework.org/schema/p"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:aop="http://www.springframework.org/schema/aop"
+	xmlns:context="http://www.springframework.org/schema/context"
+	xmlns:tx="http://www.springframework.org/schema/tx"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans 
+		http://www.springframework.org/schema/beans/spring-beans-2.0.xsd
+		http://www.springframework.org/schema/aop
+		http://www.springframework.org/schema/aop/spring-aop-2.0.xsd
+		http://www.springframework.org/schema/context 
+		http://www.springframework.org/schema/context/spring-context-2.5.xsd
+		http://www.springframework.org/schema/tx
+		http://www.springframework.org/schema/tx/spring-tx-2.0.xsd">
+
+	<tx:annotation-driven transaction-manager="transactionManager" />
+
+	
+
+	
+	<bean id="dbvDataSource" class="org.springframework.jndi.JndiObjectFactoryBean">
+		<property name="jndiName" value="dbvDataSource"/>
+	</bean>
+
+    <bean id="jpaTemplate" class="org.springframework.orm.hibernate3.HibernateTemplate">
+        <property name="sessionFactory">
+            <ref bean="sessionFactory" />
+        </property>
+    </bean>
+
+	<bean id="transactionManager" class="org.springframework.orm.hibernate3.HibernateTransactionManager">
+	        <property name="sessionFactory">
+	                <ref local="sessionFactory"/>
+	        </property>
+	</bean>
+
+		<bean id="sessionFactory" class="org.springframework.orm.hibernate3.annotation.AnnotationSessionFactoryBean">
+	    <property name="dataSource" ref="dbvDataSource"/>
+	    <property name="annotatedClasses">
+	    	<list>
+	    		<value>com.ekit.employee.data.Employee</value>		
+	    		<value>com.ekit.security.data.User</value>
+    		
+	    	</list>
+	    </property>
+	    <property name="hibernateProperties">
+	      <value>
+			hibernate.dialect=org.hibernate.dialect.OracleDialect
+			hibernate.cache.use_second_level_cache=true
+			hibernate.cache.use_query_cache=true
+			hibernate.cache.provider_class=com.googlecode.hibernate.memcached.MemcachedCacheProvider
+			hibernate.memcached.servers=127.0.0.1:11211
+	      </value>
+	    </property>
+	</bean>
+	
+	<bean id="jpaDialect"
+		class="org.springframework.orm.jpa.vendor.HibernateJpaDialect" />
+    <bean id="employeeDao"
+		class="com.ekit.employee.data.db.HibernateEmployeeDao">
+		<property name="hibernateTemplate" ref="jpaTemplate" />
+	</bean>
+	
+	<bean id="employeeService"  class="com.ekit.employee.EmployeeServiceImpl">
+		
+		  <property name="employeeDao" ref="employeeDao" />
+				  
+	</bean>   	
+
+	<bean id="freemarkerConfig"
+		class="org.springframework.web.servlet.view.freemarker.FreeMarkerConfigurer">
+		<property name="templateLoaderPath">
+			<value>/</value>
+		</property>
+		<property name="freemarkerSettings">
+			<props>
+				<prop key="template_exception_handler">rethrow</prop>
+				<prop key="number_format">0.########</prop>
+			</props>
+		</property>
+	</bean>
+
+	<bean id="viewResolver"
+		class="org.springframework.web.servlet.view.freemarker.FreeMarkerViewResolver">
+		<property name="suffix" value=".ftl" />
+		<!-- if you want to use the Spring FreeMarker macros, set this property to true -->
+		<property name="exposeSpringMacroHelpers" value="true" />
+		<property name="exposeRequestAttributes">
+			<value>true</value>
+		</property>
+		<property name="exposeSessionAttributes">
+			<value>true</value>
+		</property>
+	</bean>
+
+	
+	<bean id="dbvConnectionFactory"
+	      class="org.springframework.jndi.JndiObjectFactoryBean">
+	      <property name="jndiName" value="dbvConnectionFactory"/>
+	</bean>
+		
+	<bean id="userDao" class="com.ekit.security.data.db.HibernateUserDao">
+		<property name="hibernateTemplate" ref="jpaTemplate" />
+	</bean>
+	
+	<bean id="userService"
+		class="com.ekit.security.UserDetailsServiceImpl">
+		<property name="userDao" ref="userDao" />
+	</bean>
+	      	
+	
+	
+</beans>
