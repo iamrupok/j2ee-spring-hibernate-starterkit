@@ -20,7 +20,7 @@ Ext.onReady(function() {
 	
 	
   var store = new Ext.data.Store({
-				url : "LoadEmployeeList.dbv",
+				url : "/ekit/employee/LoadEmployeeList.dbv",
 				reader : new Ext.data.JsonReader({
 							root : "employeeList",
 							id : "employeeId",
