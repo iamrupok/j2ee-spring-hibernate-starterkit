@@ -1,0 +1,668 @@
+/*
+Black			#000000
+Medium Grey		#555555
+Light Grey		#939292
+Palest Grey		#EEEEEE
+DB Blue			#6B8C9B
+BlueGrey Catalog Text	#6782A1
+*/
+
+/*Define Background*/
+body {
+	background-color: #EEEEEE;
+}
+#main_wrapper1,#main_wrapper2 {background-color:transparent;}
+#main_content {
+	padding:5px;
+	font-family: Arial, Helvetica, sans-serif;
+	font-size: 10pt;
+	background-color: #EEEEEE;
+}
+
+/*defaults*/
+html, body,td, p, li {
+	font-family: Arial, Helvetica, sans-serif;
+	font-size: 10pt;
+	color:#000000;
+}
+.content, .contentBold {
+	font-size: 10pt;
+	font-family: Arial, Helvetica, sans-serif;
+}
+.contentLarge {
+	font-size: 12pt;
+	font-family: Arial, Helvetica, sans-serif;
+}
+#wrapper .content_row {background-color:transparent;}
+#main_content p {font-size: 10pt;}
+.SmallInstruction {font-size: 10pt;}
+
+
+/*Edges*/
+.RightSideBkgPanel {display:none;}
+#right_nav_wrapper1 {height:100%;background-color:transparent;}
+/*left_column changes to avoid preserved white space at left nav area*/
+.PageLeftBackground {background-image: none;width: 5px;}
+#left_column div.left_nav_width_full {width:1px;height:1px;}
+#left_column div.left_nav_width_none {width:1px;height:1px;}
+#footer {
+	background: url(/images/1/14-81500000/skin/footer3.gif) repeat-x;
+	font-family: Arial, Helvetica, sans-serif;
+	font-size: 10pt;
+	color:#FFFFFF;
+	background-color: transparent;
+	border: none;
+	height:30px;
+	padding: 0px;
+}
+.FooterContent {
+	font-family: Arial, Helvetica, sans-serif;
+	font-size: 10pt;
+}
+
+/*Header */
+.HeaderTopPanel {
+	background-color: #000000;
+	background-image:url(/dbvendor/images/header_bgrepeat2.gif);
+	background-repeat: repeat-x;
+	height: 160px;	/*logo 120 + extra pixels for behind top nav*/
+	width: 100%;
+	border-bottom: 0px solid #000000;
+	margin-top: 0px;
+	margin-left: 0px;
+}
+#contact_link_div,#help_link_div,#logout_link_div {top:15px;}
+#contact_link_div {right: 129px;}
+#help_link_div {right: 95px;}
+#logout_link_div {right: 47px;}
+.HeaderNavLink {
+	background-color: transparent;
+	color:#EEEEEE;
+	font-weight:bold;
+	text-decoration:none;
+	font-size: 8pt;
+	font-family: Arial, Helvetica, sans-serif;
+}
+.HeaderNavImageLink img {
+	border: none;
+}
+a.HeaderNavLink {
+	background-color: transparent;
+	color:#EEEEEE;
+	text-decoration:none;
+	font-size: 8pt;
+	font-family: Arial, Helvetica, sans-serif;
+}
+a:active.HeaderNavLink,a:hover.HeaderNavLink {
+	background-color: transparent;
+	color:#808080;
+	text-decoration:none;
+	font-size: 8pt;
+	font-family: Arial, Helvetica, sans-serif;
+}
+
+/*Messages*/
+#inbox_div {
+	top: 25px;
+	right: auto; left:400px;
+}
+#pmsg, #pmsg-ftl {background-color: #000000;}
+.new_msg {background:transparent url(/images/1/14-81500000/skin/unread_messages.gif) no-repeat scroll right top;}
+.no_msg {}
+
+
+/*Top Navigation Bar*/
+#top_nav_wrapper {
+	/*position: absolute;
+	top:120px;*/
+	/*IE problem with use of position absolute, width 100% does not work, so set to relative*/
+	position: relative;
+	top: -40px;
+	background-color: #000000;
+	background: url(/dbvendor/images/DBTopNavBG.gif);
+	background-repeat: repeat-x;
+	background-position: top center;
+	width: 100%;
+	height:40px;	
+	margin-bottom: 15px;
+}
+#top_nav {
+	border: none;
+	background-color: transparent;
+	background-image: none;
+	color: 	#EEEEEE;
+	padding: 0px 0px;
+	margin: 0;
+	height:50px;	
+}
+#top_nav li {
+	color: 	#FFFFFF;
+	border: none;
+	background-color: transparent;
+	background-image: none;
+	width:118px;
+	max-width: 250px;
+	min-width: 100px;	
+	height: 36px;
+	font-weight: bold;
+	text-align: center;
+	float: left;
+}
+#top_nav li a {
+	color: 	#EEEEEE;
+	padding: 8px 0px;
+	margin: 0;
+	font-family: Arial, Helvetica, sans-serif;
+	font-size: 8pt;
+	text-decoration: none;
+	text-transform: uppercase;
+	display: block;
+}
+
+#top_nav li a:hover, #top_nav li selected {
+	color: 	#FFFFFF;
+	background-color: transparent;
+	background: url(/dbvendor/images/DBTopNavHovers.gif);
+	background-repeat: no-repeat;
+	background-position: top center;
+	text-decoration: none;
+	text-transform: uppercase;
+}
+
+
+/*Shopping Cart*/
+#cart_div {
+	position:absolute;
+	right:25px;
+	left: auto;
+	top:36px;
+	margin-top:0px;
+	width:180px;
+	z-index:4;
+	background-color: transparent;
+}
+#cart_content {
+	color: #FFFFFF;
+	background-color: #000000;
+}
+#shoppingcart, #shoppingcart_iframe {
+	border: 1px solid #555555;
+}
+#shoppingcart .cart_lines {
+	height:40px;
+}
+#shoppingcart, #shoppingcart_iframe {
+	width:180px;
+}
+#shoppingcart .qty {
+	color: #FFFFFF;
+	left:3px;
+}
+#shoppingcart .desc {
+	color: #FFFFFF;
+	width:120px;
+}
+#shoppingcart .price {
+	color: #FFFFFF;
+	background-color: #000000;
+}
+p.no_sc_content {
+	color: #FFFFFF;
+	font-size: 10px;
+	text-align: center;
+}
+#shoppingcart .toggle_btn {
+	background-color: #6B8C9B;
+	width:180px; 
+	height: 15px;
+	border:none;
+}
+#shoppingcart .toggle_btn a {
+	color:#ffffff;
+	border:none;
+}
+#shoppingcart .toggle_btn a:hover{
+	color: #EEEEEE;
+	border:none;
+}
+#shoppingcart .cart_button {
+	background-color:#EEEEEE;
+	height: 25px;
+}
+#shoppingcart .cart_button a {
+	height: 25px;
+	border:none;
+	color:#000000;
+}
+#shoppingcart .cart_button a:hover {
+	height: 25px;
+	border: none;
+	background-color:#EEEEEE;
+	color:#555555;
+}
+
+
+/*Spending Accounts*/
+#sa_content {
+	color: #FFFFFF;
+	background-color: #000000;
+}
+#sainner_header {
+	height: 30px;
+	padding-top: 25px;
+}
+
+
+/*Checkout - cart summary labels*/
+#price_box .price_box_label {color:#6B8C9B;}
+#price_box .order_total {border:1px solid #6B8C9B;}
+
+
+/*Add to cart note*/
+#notice_div {
+	background-color:#000000; color:#FFFFFF;
+}
+/* Dialog & Loading indicator */
+.ydlg .ydlg-close {background-image: url("/images/1/14-81500000/skin/close.gif");}
+.ydlg .ydlg-hd {
+	background: transparent url("/images/1/14-81500000/skin/hd-sprite.gif") repeat-x scroll bottom center;
+	border: 1px solid #000000;
+}
+.ydlg .ydlg-hd-left {
+	margin:0px;
+	padding-left:0px;
+}
+.ydlg .ydlg-hd-right {
+	margin:0px;
+	padding-right:0px;
+}
+.ydlg .ydlg-dlg-body {
+	border:1px solid #000000;
+	background-color: #FFFFFF;
+	color: #000000;
+}
+.loading-indicator {
+	color:#000000;
+}
+
+/*tabs*/
+.yui-ext-tabbody {border:1px solid #000000;border-top:none;}
+.ytab-right {border-top:1px solid #000000;border-right:1px solid #000000;border-left:1px solid #000000;}
+.ytab-wrap {border-bottom: 1px solid #000000;}
+.ytab-strip .on .ytab-text {
+	color:#000000;
+	/*background: transparent url("/images/1/14-81500000/skin/hd-sprite.gif") repeat-x scroll bottom center;
+	width: 100%;
+	height: 100%;*/
+}
+
+/*Headers and Titles*/
+.TitleLevel01 {color: #000000; font-size: 10pt;text-transform:none;font-family: Arial, Helvetica, sans-serif;}
+.TitleLevel02 {color: #000000; font-size: 12pt;text-transform:none;font-family: Arial, Helvetica, sans-serif;}
+.TitleLevel03 {color: #000000; font-size: 16px;text-transform:none;font-family: Arial, Helvetica, sans-serif;}
+
+h1 {font-size: 14pt;color:#000000;text-transform:none;font-family: Arial, Helvetica, sans-serif;}
+h2 {font-size: 12pt;color:#000000;text-transform:none;font-family: Arial, Helvetica, sans-serif;}
+h3 {font-size: 10pt;color:#000000;text-transform:none;font-family: Arial, Helvetica, sans-serif;}
+
+.reverseH1 {
+	font-family: Arial, Helvetica, sans-serif;
+	font-size: 14pt;
+	BACKGROUND-COLOR:#000000;
+	text-transform:none;
+}
+.reverseH2 {
+	font-family: Arial, Helvetica, sans-serif;
+	font-size: 12pt;
+	BACKGROUND-COLOR:#000000;
+	text-transform:none;
+}
+.reverseH3 {
+	font-family: Arial, Helvetica, sans-serif;
+	font-size: 10pt;
+	BACKGROUND-COLOR:#000000;
+	text-transform:none;
+}
+.FormLabels {
+	font-family: Arial, Helvetica, sans-serif;
+	font-size: 10pt;
+	color: #000000;
+}
+
+
+/*Table Headers*/
+table.epm_table th,#epm_table th,th,#order_list th,#itemlist th,.ListHeaders,TD.ListHeadersRed {
+	color:	#FFFFFF;
+	background-color: transparent;
+	background: url(/images/1/14-81500000/skin/hd-sprite.gif);
+	background-repeat: repeat-x;
+	background-position: center center;
+	font-family: Arial, Helvetica, sans-serif;
+	font-size: 10pt;
+	font-weight: bold;
+}
+
+/*Table Rows*/
+.TableRows {
+	color: #000000;
+	font-size: 10pt; 
+	font-family: Arial, Helvetica, sans-serif;
+}
+.OddRowColor {
+	color: #000000;
+	background-color: #EFEFEF;
+	font-size: 10pt;
+	font-family: Arial, Helvetica, sans-serif;
+}
+.EvenRowColor {
+	color: #000000;
+	background-color: #FFFFFF;
+	font-size: 10pt;
+	font-family: Arial, Helvetica, sans-serif;
+}
+
+
+/*Catalog*/
+#kodakTree {
+	background-color:#EEEEEE;
+	color:#000000;
+}
+
+#catTree {
+	background-color:#EEEEEE;
+	color:#000000;
+	width:200px;
+	font-size: 10pt;
+	padding: 0px;
+	border-top:1px solid #CCCCCC;
+}
+#catTree .ygtvtn { background: url(/images/1/14-81500000/skin/circle.gif) 0px 5px no-repeat; padding-left:5px; width:1em; height:20px; cursor:pointer }/* first or middle sibling, no children */
+#catTree .ygtvtmh { padding-top:0px;background: url(/images/1/14-81500000/skin/collapse.gif) 0px 5px no-repeat; padding-left:5px; width:1em; height:20px; cursor:pointer }/* first or middle sibling, collapsable */
+#catTree .ygtvtm { padding-top:0px;background: url(/images/1/14-81500000/skin/collapse.gif) 0px 5px no-repeat; padding-left:5px; width:1em; height:20px; cursor:pointer }/* first or middle sibling, collapsable */
+#catTree .ygtvtph { background: url(/images/1/14-81500000/skin/expand.gif) 0px 5px no-repeat; padding-left:5px; width:1em; height:20px; cursor:pointer }/* first or middle sibling, expandable */
+#catTree .ygtvtp { background: url(/images/1/14-81500000/skin/expand.gif) 0px 5px no-repeat; padding-left:5px; width:1em; height:20px; cursor:pointer }/* first or middle sibling, expandable */
+#catTree .ygtvln { background: url(/images/1/14-81500000/skin/circle.gif) 0px 5px no-repeat; padding-left:5px; width:1em; height:20px; cursor:pointer }/* last sibling, no children */
+#catTree .ygtvlm { background: url(/images/1/14-81500000/skin/collapse.gif) 0px 5px no-repeat; padding-left:5px;width:1em; height:20px; cursor:pointer }/* Last sibling, collapsable */
+#catTree .ygtvlmh { background: url(/images/1/14-81500000/skin/collapse.gif) 0px 5px no-repeat; padding-left:5px;width:1em; height:20px; cursor:pointer }/* Last sibling, collapsable, hover */
+#catTree .ygtvlp { background: url(/images/1/14-81500000/skin/expand.gif) 0px 5px no-repeat; padding-left:5px;width:1em; height:20px; cursor:pointer }/* Last sibling, expandable */
+#catTree .ygtvlph { background: url(/images/1/14-81500000/skin/expand.gif) 0px 5px no-repeat; padding-left:5px;width:1em; height:20px; cursor:pointer }/* Last sibling, expandable, hover */
+#catTree .ygtvchildren {padding:0px;}  /* the style of the div around each node's collection of children */
+#catTree .ygtvchildren .ygtvitem {
+	background:#CCCCCC url(/images/1/14-81500000/skin/off.gif) repeat-x;
+	padding:0px;
+	min-height: 25px;
+	border-bottom:1px solid #CCCCCC;
+	border-right:1px solid #CCCCCC;
+	text-transform: none;
+	letter-spacing: 0;
+}
+#catTree .ygtvdepthcell { background:none;text-decoration:none;}
+.CatalogNavLink {
+	color: #000000;	font-size: 10pt;font-family: Arial, Helvetica, sans-serif;
+	text-decoration: none;text-transform:none;
+}
+A:hover.CatalogNavLink, A:active.CatalogNavLink {
+	color:#6782A1;
+	font-weight: normal;font-size: 10pt;font-family: Arial, Helvetica, sans-serif;
+	text-decoration:none;
+}
+.CatalogNavLinkHighlight {
+	background-color: transparent;color: #000000;
+	font-size: 10pt;font-weight: bold;font-family: Arial, Helvetica, sans-serif;
+	text-decoration: none;text-transform:none;}
+A.CatalogNavLinkHighlight {
+	color: #000000;
+	font-size: 10pt;font-weight: bold;font-family: Arial, Helvetica, sans-serif;text-decoration: none;}
+A:hover.CatalogNavLinkHighlight, A:active.CatalogNavLinkHighlight {
+	color: #6782A1;	
+	font-size: 10pt;font-weight: bold;font-family: Arial, Helvetica, sans-serif;text-decoration: none;}
+
+/*Catalog Sort Links*/
+.MenuNavLink {
+	color: #FFFFFF;font-size: 10pt;font-family: Arial, Helvetica, sans-serif;text-decoration: underline}
+A:hover.MenuNavLink, A:active.MenuNavLink {
+	color: #FFFFFF;	font-size: 10pt;font-family: Arial, Helvetica, sans-serif;text-decoration: underline;}
+
+/*Catalog search - after shrinking left nav wrapper, this needs to be reset*/
+#browse_catalog_wrapper {
+	padding-left: 0px;
+}
+
+/*Assets*/
+#asset_tree {
+	background-color:#EEEEEE;
+	color:#000000;
+	width:200px;
+	font-size: 10pt;
+	padding: 0px;
+	/*avoid retention of white space when not shown*/
+	position:relative;
+	width:auto;
+}
+#asset_tree_wrapper {background-color: transparent;}
+#asset_tree_div {background-color: transparent;color:#000000; width:200px;border-right: none;}
+#asset_tree_div .ygtvtn { background: url(/images/1/14-81500000/skin/bulletsquare.gif) 0px 5px no-repeat; padding-left:5px; width:1em; height:20px; cursor:pointer }/* first or middle sibling, no children */
+#asset_tree_div .ygtvtmh { padding-top:0px;background: url(/images/1/14-81500000/skin/collapse.gif) 0px 5px no-repeat; padding-left:5px; width:1em; height:20px; cursor:pointer }/* first or middle sibling, collapsable */
+#asset_tree_div .ygtvtm { padding-top:0px;background: url(/images/1/14-81500000/skin/collapse.gif) 0px 5px no-repeat; padding-left:5px; width:1em; height:20px; cursor:pointer }/* first or middle sibling, collapsable */
+#asset_tree_div .ygtvtph { background: url(/images/1/14-81500000/skin/expand.gif) 0px 5px no-repeat; padding-left:5px; width:1em; height:20px; cursor:pointer }/* first or middle sibling, expandable */
+#asset_tree_div .ygtvtp { background: url(/images/1/14-81500000/skin/expand.gif) 0px 5px no-repeat; padding-left:5px; width:1em; height:20px; cursor:pointer }/* first or middle sibling, expandable */
+#asset_tree_div .ygtvln { background: url(/images/1/14-81500000/skin/bulletsquare.gif) 0px 5px no-repeat; padding-left:5px; width:1em; height:20px; cursor:pointer }/* last sibling, no children */
+#asset_tree_div .ygtvlm { background: url(/images/1/14-81500000/skin/collapse.gif) 0px 5px no-repeat; padding-left:5px;width:1em; height:20px; cursor:pointer }/* Last sibling, collapsable */
+#asset_tree_div .ygtvlmh { background: url(/images/1/14-81500000/skin/collapse.gif) 0px 5px no-repeat; padding-left:5px;width:1em; height:20px; cursor:pointer }/* Last sibling, collapsable, hover */
+#asset_tree_div .ygtvlp { background: url(/images/1/14-81500000/skin/expand.gif) 0px 5px no-repeat; padding-left:5px;width:1em; height:20px; cursor:pointer }/* Last sibling, expandable */
+#asset_tree_div .ygtvlph { background: url(/images/1/14-81500000/skin/expand.gif) 0px 5px no-repeat; padding-left:5px;width:1em; height:20px; cursor:pointer }/* Last sibling, expandable, hover */
+#asset_tree_div .ygtvchildren {padding:0px;}  /* the style of the div around each node's collection of children */
+#asset_tree_div .ygtvchildren .ygtvitem {
+	background:#CCCCCC url(/images/1/14-81500000/skin/off.gif) repeat-x;
+	padding:0px;
+	min-height: 25px;
+	border-bottom:1px solid #CCCCCC;
+	border-right:1px solid #CCCCCC;
+	text-transform: none;
+	letter-spacing: 0;
+}
+#asset_tree_div .ygtvchildren .ygtvchildren .ygtvitem {background:none;padding-bottom:0px;}
+#asset_tree_div .ygtvdepthcell { background:none;text-decoration:none;}
+#asset_tree_div .ygtvlabel {
+	background-color: transparent;color: #000000;	font-size: 10pt;font-family: Arial, Helvetica, sans-serif;
+	text-decoration: none;text-transform:none;
+}
+#asset_tree_div .ygtvlabel:hover, .ygtvlabel:active{
+	background-color: transparent;color:#6782A1;
+	font-weight: normal;font-size: 10pt;font-family: Arial, Helvetica, sans-serif;
+	text-decoration:none;
+}
+#asset_tree_div .ygtvlabel_selected a{
+	background-color: transparent;color:#6782A1;
+	font-weight: normal;font-size: 10pt;font-family: Arial, Helvetica, sans-serif;
+	text-decoration:none;
+}
+
+
+/**ADMIN CONTROL PANEL**/
+#admin_command_list {float:left;width:250px;margin-bottom:20px;}
+#custadminhome {float:left;width:400px;}
+#custadminhome .userlist {width:400px;clear:none;}
+#custadminhome .grouplist {width:400px;clear:none;}
+#userlist_select {padding-bottom:10px;}
+#grouplist_select {padding-bottom:10px;}
+/** SIDENAV MENU **/
+#sidenav_menu {
+	background-image: none;
+	background-color: transparent; 
+	width:220px;
+	display: block;
+	font-family: Arial, Helvetica, sans-serif;
+	font-size: 10pt;
+	border: none;
+}
+#sidenav_menu .ygtvtn, #sidenav_menu .ygtvln, #sidenav_menu .ygtvitem  {
+	background-image: none;
+	background-color: transparent;
+}
+#sidenav_menu .SideNavLink {
+	background-color: transparent;
+	color: #000000;
+	border-bottom: none;
+	text-decoration: none;
+	display: block;
+	padding: 5px 15px 5px 15px;
+	font-family: Arial, Helvetica, sans-serif;
+	font-size: 10pt;
+}
+#sidenav_menu A:hover.SideNavLink, #sidenav_menu A:active.SideNavLink {
+	background-color: transparent;
+	background:#CCCCCC url(/images/1/14-81500000/skin/off.gif) repeat-x;
+	color: #6B8C9B;
+	text-decoration: none;
+	font-family: Arial, Helvetica, sans-serif;
+	font-size: 10pt;
+	font-weight: bold;
+}
+
+
+/*Links*/
+A.HIGHLIGHT{
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 10pt;
+    BACKGROUND-COLOR: transparent;
+    color: #000000;
+}
+A:hover.HIGHLIGHT, A:active.HIGHLIGHT{
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 10pt;
+    BACKGROUND-COLOR: transparent;
+    color: #6B8C9B;
+}
+A {
+	font-family: Arial, Helvetica, sans-serif;
+	font-size: 10pt;
+	color: #000000;
+	background-color: transparent;
+	text-decoration: none;
+}
+A:hover, A:active {
+	font-family: Arial, Helvetica, sans-serif;
+	font-size: 10pt;
+	color: #6B8C9B;
+	background-color: transparent;
+	text-decoration: underline;
+}
+A.ContentLink {
+	font-family: Arial, Helvetica, sans-serif;
+	font-size: 10pt;
+	color: #000000;
+	background-color: transparent;
+	text-decoration: underline;
+}
+A:hover.ContentLink, A:active.ContentLink {
+	font-family: Arial, Helvetica, sans-serif;
+	font-size: 10pt;
+	color: #6B8C9B;
+	background-color: transparent;
+	text-decoration: underline;
+}
+A.ReverseContentLink {
+	font-family: Arial, Helvetica, sans-serif;
+	font-size: 10pt;
+	background-color: #000000;
+	color: #ffffff;
+	text-decoration: underline;
+}
+A:hover.ReverseContentLink, A:active.ReverseContentLink {
+	font-family: Arial, Helvetica, sans-serif;
+	font-size: 10pt;
+	background-color: #000000;
+	color: #ffffff;
+	text-decoration: underline;
+}
+A.ForgotPasswordLink			{
+	font-family: Arial, Helvetica, sans-serif;
+	font-size: 10pt;
+	color: #000000;
+	background-color: transparent;
+	text-decoration: underline;
+}
+A:hover.ForgotPasswordLink, A:active.ForgotPasswordLink {
+	font-family: Arial, Helvetica, sans-serif;
+	font-size: 10pt;
+	color: #6B8C9B;
+	background-color: transparent;
+	text-decoration: underline;
+}
+
+/*Spell Check Links*/
+.spellCheckMenu {
+	background-color: #FFFFFF;
+}
+A.spellCheckMenu {
+	color: #000000;
+	font-size: 10pt;
+	font-weight: normal;
+	padding: 2px;
+	font-family: Arial, Helvetica, sans-serif;
+	background-color: #FFFFFF;
+	text-decoration: none;
+}
+A:hover.spellCheckMenu {
+	color: #939292;
+	font-size: 10pt;
+	font-weight: normal;
+	padding: 2px;
+	font-family: Arial, Helvetica, sans-serif;
+	background-color: #FFFFFF;
+	text-decoration: none;
+}
+A.spellCheckBadWord, A:hover.spellCheckBadWord, A:active.spellCheckBadWord, A.spellCheckGoodWord, A:hover.spellCheckGoodWord, A:active.spellCheckBadWord {
+	font-family: Arial, Helvetica, sans-serif;
+	font-size: 10pt;
+}
+
+/*Table Links*/
+A.TableRowLinks {
+	font-family: Arial, Helvetica, sans-serif;
+	font-size: 10pt;
+	color: #000000;
+	text-decoration: underline;
+}
+A:hover.TableRowLinks, A:active.TableRowLinks {
+	font-family: Arial, Helvetica, sans-serif;
+	font-size: 10pt;
+	color: #6B8C9B;
+	text-decoration: underline;
+}
+
+/*Links for company/group info areas with options across top*/
+A.TabMenuLink {
+	font-family: Arial, Helvetica, sans-serif;
+	font-size: 10pt;
+	color: #000000;
+	text-decoration: underline;
+}
+A:hover.TabMenuLink, A:active.TabMenuLink {
+	font-family: Arial, Helvetica, sans-serif;
+	font-size: 10pt;
+	color: #6B8C9B;
+	text-decoration: underline;
+}
+
+
+#error_display {
+	background-color:#FFFFFF;
+	color: #000000;
+	border:1px solid #000000;
+}
+
+
+/*Form elements - our classes*/
+.TextBox,.Textarea,.textbox_required,.radio,.checkbox,.dropdown,.fileinput,.selectlist,.dropdownMonospaced,.button  {
+	color: #000000;
+	background-color: #FFFFFF;
+	border:solid 1px #555555;
+}
+/*Form elements - HTML defaults*/
+select, textarea, input {
+	color: #000000;
+	background-color: #FFFFFF;
+	border:solid 1px #555555;
+}
