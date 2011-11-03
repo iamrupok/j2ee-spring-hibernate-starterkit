@@ -79,5 +79,42 @@ public class SecurityController extends DBVController {
 		    e.printStackTrace();
 		}
     }
+    
+    @SuppressWarnings("unchecked")
+	public ModelAndView AdminHome(HttpServletRequest request, HttpServletResponse response)
+			throws Exception {
+		if(logger.isDebugEnabled()) {
+		    logger.debug("AdminHome(HttpServletRequest, HttpServletResponse) - start"); 
+		}
+		
+		HashMap adminMap = new HashMap();
+		adminMap.put("PageLink", "Dashboard");
+		adminMap.put("PageTitle", "Administrator-Home");
+		ModelAndView adminHomeModelAndView = new ModelAndView("/security/admin_home", adminMap);
+		
+		if(logger.isDebugEnabled()) {
+		    logger.debug("AdminHome(HttpServletRequest, HttpServletResponse) - end"); 
+		}
+		
+		return adminHomeModelAndView;
+	}
 
+    @SuppressWarnings("unchecked")
+	public ModelAndView UserHome(HttpServletRequest request, HttpServletResponse response) 
+			throws Exception {
+		if(logger.isDebugEnabled()) {
+		    logger.debug("UserHome(HttpServletRequest, HttpServletResponse) - start"); 
+		}
+		
+		HashMap userMap = new HashMap();
+		userMap.put("PageLink", "users");
+		userMap.put("PageTitle", "Manage-Users");
+		ModelAndView manageUsersModelAndView = new ModelAndView("/security/user_home", userMap);
+		
+		if(logger.isDebugEnabled()) {
+		    logger.debug("UserHome(HttpServletRequest, HttpServletResponse) - end"); 
+		}
+		
+		return manageUsersModelAndView;
+	}
 }
