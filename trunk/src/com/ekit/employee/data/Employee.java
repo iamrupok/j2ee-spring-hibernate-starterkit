@@ -10,6 +10,7 @@ import javax.persistence.Id;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 
+import com.ekit.util.StringUtil;
 import com.ekit.util.data.SimpleMemberMappable;
 
 
@@ -172,12 +173,7 @@ public class Employee implements SimpleMemberMappable{
 		this.status = status;
 	}
 
-	public Map<String, String> getSimpleMemberMap() {
-		// TODO Auto-generated method stub
-		return null;
-	}
-	
-	
+		
 	/*public String getEmail() {
 		return email;
 	}
@@ -185,27 +181,6 @@ public class Employee implements SimpleMemberMappable{
 	public void setEmail(String email) {
 		this.email = email;
 	}*/
-
-/*	public Map<String,String> getSimpleMemberMap(){
-		Map<String,String> map = new HashMap<String,String>();
-		map.put("employeeId",StringUtil.nullToZeroLengthStr(""+this.getEmployeeId()));
-		map.put("lastName", ""+this.getLastName());
-		map.put("firstName", StringUtil.nullToZeroLengthStr(this.getFirstName()));
-		map.put("address", StringUtil.nullToZeroLengthStr(this.getAddress()));
-		map.put("country", StringUtil.nullToZeroLengthStr(this.getCountry()));
-		map.put("city", StringUtil.nullToZeroLengthStr(this.getCity()));
-		map.put("region", StringUtil.nullToZeroLengthStr(this.getRegion()));
-		map.put("postalCode", StringUtil.nullToZeroLengthStr(this.getPostalCode()));
-		map.put("homePhone", StringUtil.nullToZeroLengthStr(this.getHomePhone()));
-		map.put("notes", StringUtil.nullToZeroLengthStr(this.getNotes()));
-		map.put("hireDate", StringUtil.nullToZeroLengthStr(this.getHireDate()));
-		map.put("birthDate", StringUtil.nullToZeroLengthStr(this.getBirthDate()));
-		map.put("status", ""+this.getStatus());
-		map.put("active", this.isActive());
-		map.put("extension", "" + this.getExtension());
-//		map.put("highestAttainedDegree", ""+this.getHighestAttainedDegree());
-		return map;
-	}
 
 	public String isActive() {
 		return active;
@@ -234,7 +209,27 @@ public class Employee implements SimpleMemberMappable{
 	public String getActive() {
 		return active;
 	}
-	*/
+	
+	public Map<String, String> getSimpleMemberMap() {
+		Map<String,String> map = new HashMap<String,String>();
+		map.put("employeeId",StringUtil.nullToZeroLengthStr(""+this.getEmployeeId()));
+		map.put("lastName", ""+this.getLastName());
+		map.put("firstName", StringUtil.nullToZeroLengthStr(this.getFirstName()));
+		map.put("address", StringUtil.nullToZeroLengthStr(this.getAddress()));
+		map.put("country", StringUtil.nullToZeroLengthStr(this.getCountry()));
+		map.put("city", StringUtil.nullToZeroLengthStr(this.getCity()));
+		map.put("region", StringUtil.nullToZeroLengthStr(this.getRegion()));
+		map.put("postalCode", StringUtil.nullToZeroLengthStr(this.getPostalCode()));
+		map.put("homePhone", StringUtil.nullToZeroLengthStr(this.getHomePhone()));
+		map.put("notes", StringUtil.nullToZeroLengthStr(this.getNotes()));
+		map.put("hireDate", StringUtil.nullToZeroLengthStr(this.getHireDate()));
+		map.put("birthDate", StringUtil.nullToZeroLengthStr(this.getBirthDate()));
+		map.put("status", ""+this.getStatus());
+		map.put("active", this.isActive());
+		map.put("extension", "" + this.getExtension());
+
+		return map;
+	}
 	
 }
 
