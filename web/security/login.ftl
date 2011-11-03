@@ -11,7 +11,7 @@
 <div class="pos">
 <div class="out">
 <div class="in">
-<div class="header"><span>Welcome to EmployeeStarterKit(Java)</span></div>
+<div class="header"><span></span></div>
 <div class="left"></div>
 
 <div class="exist"> 
