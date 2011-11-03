@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE beans PUBLIC "-//SPRING//DTD BEAN 2.0//EN" "http://www.springframework.org/dtd/spring-beans-2.0.dtd">
+<beans>
+	<!-- freemarker config -->
+
+	<bean id="multipartResolver" class="org.springframework.web.multipart.commons.CommonsMultipartResolver" />
+	<bean id="messageSource"
+		class="org.springframework.context.support.ResourceBundleMessageSource">
+		<property name="basename" value="errors" />
+	</bean>
+	<bean id="employeeController" class="com.ekit.employee.EmployeeController">
+    	<property name="userDetailsService" ref="userService"/>
+    	<property name="employeeService" ref="employeeService"/>
+	</bean>
+	
+	<bean id="securityController" class="com.ekit.security.SecurityController">
+	    	<property name="userDetailsService" ref="userService"/>
+	</bean>
+
+	<bean id="urlMapping"
+		class="org.springframework.web.servlet.handler.SimpleUrlHandlerMapping">
+		<property name="alwaysUseFullPath" value="true" />
+		<property name="mappings">
+			<props>
+				
+				<prop key="/employee/*">employeeController</prop>
+				<prop key="/security/*">securityController</prop>
+
+			</props>
+		</property>
+	</bean>
+
+
+</beans>

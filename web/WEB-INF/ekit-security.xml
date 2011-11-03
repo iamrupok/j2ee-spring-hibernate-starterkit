@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans:beans xmlns="http://www.springframework.org/schema/security"
+    xmlns:beans="http://www.springframework.org/schema/beans"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://www.springframework.org/schema/beans
+		http://www.springframework.org/schema/beans/spring-beans-3.0.xsd
+		http://www.springframework.org/schema/security
+		http://www.springframework.org/schema/security/spring-security-3.0.3.xsd">
+
+    <global-method-security secured-annotations="enabled" />
+    
+	<http entry-point-ref="dbEntryPoint">
+        <intercept-url pattern="/security/Login.dbv" filters="none" />
+        <intercept-url pattern="/**/*.htm*" filters="none" />
+        <intercept-url pattern="/**/*.ws" filters="none" />
+        <intercept-url pattern="/**/*.js" filters="none" />
+        <intercept-url pattern="/**/*.css" filters="none" />
+        <intercept-url pattern="/**/*.png" filters="none" />
+        <intercept-url pattern="/**/*.jpg" filters="none" />
+        <intercept-url pattern="/**/*.gif" filters="none" />
+        <intercept-url pattern="/**" access="ROLE_USER" />
+		<logout logout-success-url="/security/Login.dbv" />
+		<custom-filter ref="dbAuthFilter" position="FORM_LOGIN_FILTER" />
+    </http>
+    
+
+	<beans:bean id="dbEntryPoint" class="org.springframework.security.web.authentication.LoginUrlAuthenticationEntryPoint">
+        <beans:property name="loginFormUrl" value="/security/Login.dbv" />
+        <beans:property name="forceHttps" value="false" />
+    </beans:bean>
+
+	<beans:bean id="dbAuthFilter" class="com.ekit.security.DBAuthenticationFilter">
+        <beans:property name="authenticationManager" ref="dbAuthenticationManager" />
+       <!--  <beans:property name="authenticationFailureHandler" ref="failureHandler" />
+        -->
+	</beans:bean>
+
+    <authentication-manager alias="dbAuthenticationManager">
+    	<authentication-provider ref="dbAuthenticationProvider" />
+    </authentication-manager>
+
+	<beans:bean id="dbAuthenticationProvider" class="com.ekit.security.DBAuthenticationProviders">
+    	<beans:property name="userDetailsService" ref="userService"/>
+	</beans:bean>
+
+    
+</beans:beans>
