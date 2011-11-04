@@ -30,7 +30,8 @@ NOCACHE
 NOPARALLEL
 MONITORING;
 
-
+//admin pwd admin
+//test pwd test
 Insert into DB_SECURITY_USER
    (ID, USERNAME, PASSWORD, EMAIL, FIRSTNAME, 
     LASTNAME, USER_TYPE)
