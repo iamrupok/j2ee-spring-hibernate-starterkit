@@ -14,20 +14,14 @@ import org.springframework.security.web.authentication.UsernamePasswordAuthentic
  * Processes an authentication form submission
  */
 public class DBAuthenticationFilter extends UsernamePasswordAuthenticationFilter {
-    /**
-     * Logger for this class
-     */
    
-
     public static final String SPRING_SECURITY_FORM_USERNAME_KEY = "j_username";
     public static final String SPRING_SECURITY_FORM_PASSWORD_KEY = "j_password";
     public static final String SPRING_SECURITY_FORM_SITE_KEY = "j_site";
     public static final String SPRING_SECURITY_FORM_DOMAIN_KEY = "j_domain";
     public static final String SPRING_SECURITY_LAST_USERNAME_KEY = "SPRING_SECURITY_LAST_USERNAME";
 
-    private String usernameParameter = SPRING_SECURITY_FORM_USERNAME_KEY;
-    private String passwordParameter = SPRING_SECURITY_FORM_PASSWORD_KEY;
-
+   
     /**
      * Returns a populated authentication token for the authenticated user,
      * indicating successful authentication. Returns null, indicating that the
@@ -44,9 +38,7 @@ public class DBAuthenticationFilter extends UsernamePasswordAuthenticationFilter
      */
     public Authentication attemptAuthentication(HttpServletRequest request,
 	    HttpServletResponse response) throws AuthenticationException {
-	if(logger.isDebugEnabled()) {
-	    logger.debug("attemptAuthentication(HttpServletRequest, HttpServletResponse) - start");
-	}
+	
 
 	String username = obtainUsername(request);
 	String password = obtainPassword(request);
@@ -71,9 +63,7 @@ public class DBAuthenticationFilter extends UsernamePasswordAuthenticationFilter
 
 	Authentication returnAuthentication = this.getAuthenticationManager().authenticate(
 		authRequest);
-	if(logger.isDebugEnabled()) {
-	    logger.debug("attemptAuthentication(HttpServletRequest, HttpServletResponse) - end");
-	}
+	
 	return returnAuthentication;
     }
 
@@ -85,14 +75,9 @@ public class DBAuthenticationFilter extends UsernamePasswordAuthenticationFilter
      * @param authRequest
      */
     protected void setDetails(HttpServletRequest request, DBAuthenticationToken authRequest) {
-	if(logger.isDebugEnabled()) {
-	    logger.debug("setDetails(HttpServletRequest, DBAuthenticationToken) - start");
-	}
-
+	
 	authRequest.setDetails(authenticationDetailsSource.buildDetails(request));
 
-	if(logger.isDebugEnabled()) {
-	    logger.debug("setDetails(HttpServletRequest, DBAuthenticationToken) - end");
-	}
+	
     }
 }
