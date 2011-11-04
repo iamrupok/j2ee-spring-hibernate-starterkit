@@ -74,7 +74,7 @@ public class UserDetailsServiceImpl implements UserDetailsService {
     		userMap.put("email", user.getEmail() == null ? null : user.getEmail().toString());
     		userMap.put("firstName", user.getFirstName() == null ? null : user.getFirstName().toString());
     		userMap.put("lastName", user.getLastName() == null ? null : user.getLastName().toString());
-    		userMap.put("userType",user.getUser_type() );
+    		userMap.put("userType",user.getUserType() );
     		userMappedList.add(userMap);
     	}
 		

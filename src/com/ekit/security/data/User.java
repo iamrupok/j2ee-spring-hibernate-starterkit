@@ -3,6 +3,7 @@ package com.ekit.security.data;
 import java.util.ArrayList;
 import java.util.Collection;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
@@ -38,8 +39,8 @@ public class User  implements UserDetails {
 	private String firstName;
 	
 	private String lastName;
-	
-	private String user_type;
+	@Column(name="USER_TYPE")
+	private String usertype;
 	
 	private String password;
 	
@@ -86,12 +87,12 @@ public class User  implements UserDetails {
 		this.lastName = lastName;
 	}
 	
-	public String getUser_type() {
-		return user_type;
+	public String getUserType() {
+		return usertype;
 	}
 
-	public void setUser_type(String user_type) {
-		this.user_type = user_type;
+	public void setUserType(String usertype) {
+		this.usertype = usertype;
 	}
 	
 	public String getPassword() {
@@ -105,15 +106,19 @@ public class User  implements UserDetails {
 	public Collection<GrantedAuthority> getAuthorities() {
 		
 		ArrayList authorities = new ArrayList();
+		// Any Authorized User gets the authority ROLE_USER
 		GrantedAuthorityImpl authority = new GrantedAuthorityImpl(ROLE_USER);
 		authorities.add(authority);
-		
-		if(this.getUser_type()=="Admin" ) {
+
+		// Admin or User?
+		if(this.getUserType().equals("Admin" )) {
 		    GrantedAuthorityImpl adminAuthority = new GrantedAuthorityImpl(ROLE_ADMIN);
 		    authorities.add(adminAuthority);
 		}
 		
+		
 		return authorities;
+
 	}
 
 	public boolean hasRole(String role) {
@@ -127,41 +132,22 @@ public class User  implements UserDetails {
 	}
 
 	public boolean isAccountNonExpired() {
-		// TODO Auto-generated method stub
-		return false;
-	}
+		return true;
+	    }
 
 	public boolean isAccountNonLocked() {
-		// TODO Auto-generated method stub
-		return false;
-	}
+		return true;
+	    }
 
+	
 	public boolean isCredentialsNonExpired() {
-		// TODO Auto-generated method stub
-		return false;
-	}
+		return true;
+	    }
 
 	public boolean isEnabled() {
-		// TODO Auto-generated method stub
-		return false;
-	}
-
+		return true;
+	    }
 	
-	/*public String getDecryptPassword() {
-    	String password = getPassword();
-    	String username = getUsername();
-    	if (password != null && username != null) {
-    		DESEDE desede = new DESEDE(username);
-    		password = desede.decrypt(password);
-    		return password;
-    	}
-    	
-    	return null;
-    }*/
-	
-	
-
-
 	
 }
 
