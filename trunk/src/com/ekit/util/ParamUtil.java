@@ -11,7 +11,6 @@ import javax.servlet.http.HttpServletRequest;
 
 import org.apache.commons.lang.time.DateUtils;
 
-
 /**
  * This class deal with formatting of parameters of different types from one to
  * another type
@@ -83,8 +82,8 @@ public class ParamUtil {
      * @return boolean
      */
     public static boolean exists(HttpServletRequest request, String paramName) {
-	boolean returnboolean = exists(request.getParameter(paramName));
-	return returnboolean;
+		boolean returnboolean = exists(request.getParameter(paramName));
+		return returnboolean;
     }
 
     /**
@@ -94,8 +93,8 @@ public class ParamUtil {
      * @return boolean
      */
     public static boolean exists(String param) {
-	boolean returnboolean = (param == null || param.trim().equals("")) ? false : true;
-	return returnboolean;
+		boolean returnboolean = (param == null || param.trim().equals("")) ? false : true;
+		return returnboolean;
     }
 
     /**
@@ -105,8 +104,8 @@ public class ParamUtil {
      * @return boolean
      */
     public static boolean empty(String param) {
-	boolean returnboolean = param.trim().equals("");
-	return returnboolean;
+		boolean returnboolean = param.trim().equals("");
+		return returnboolean;
     }
 
     /**
@@ -116,22 +115,17 @@ public class ParamUtil {
      * @return boolean
      */
     public static boolean isInt(String param) {
-
-    if(!exists(param)) {
-	    return false;
-	}
-	boolean caught = false;
-
-	try {
-	    Integer.parseInt(param);
-	} catch(NumberFormatException e) {
-	   
-
-	    caught = true;
-	}
-
-	boolean returnboolean = caught ? false : true;
-	return returnboolean;
+	    if(!exists(param)) {
+		    return false;
+		}
+		boolean caught = false;
+		try {
+		    Integer.parseInt(param);
+		} catch(NumberFormatException e) {
+		    caught = true;
+		}
+		boolean returnboolean = caught ? false : true;
+		return returnboolean;
     }
 
     /**
@@ -142,21 +136,16 @@ public class ParamUtil {
      */
     public static boolean isDouble(String param) {
 	
-    if(!exists(param))
+    	if(!exists(param))
 	    return false;
-
-	boolean caught = false;
-
-	try {
-	    Double.parseDouble(param);
-	} catch(NumberFormatException e) {
-	   
-
-	    caught = true;
-	}
-
-	boolean returnboolean = caught ? false : true;
-	return returnboolean;
+		boolean caught = false;
+		try {
+		    Double.parseDouble(param);
+		} catch(NumberFormatException e) {
+		    caught = true;
+		}
+		boolean returnboolean = caught ? false : true;
+		return returnboolean;
     }
 
     /**
@@ -167,22 +156,17 @@ public class ParamUtil {
      */
     public static boolean isFloat(String param) {
 	
-	if(!exists(param)) {
-	    
-	    return false;
-	}
-	boolean caught = false;
-
-	try {
-	    Float.parseFloat(param);
-	} catch(NumberFormatException e) {
-	   
-	    caught = true;
-	}
-
-	boolean returnboolean = caught ? false : true;
-	
-	return returnboolean;
+		if(!exists(param)) {
+		    return false;
+		}
+		boolean caught = false;
+		try {
+		    Float.parseFloat(param);
+		} catch(NumberFormatException e) {
+		    caught = true;
+		}
+		boolean returnboolean = caught ? false : true;
+		return returnboolean;
     }
 
     /**
@@ -192,26 +176,19 @@ public class ParamUtil {
      * @return boolean
      */
     public static boolean isDate(String param) {
+		
+    	if(!exists(param)) {
+		    return false;
+		}
+		boolean caught = false;
+			try {
+				dateFormat.parse(param);
+		} catch(ParseException e) {
+		   	caught = true;
+		}
 	
-
-	if(!exists(param)) {
-	    
-	    return false;
-	}
-	boolean caught = false;
-
-	try {
-	    dateFormat.parse(param);
-	} catch(ParseException e) {
-	   
-
-	    e.printStackTrace();
-	    caught = true;
-	}
-
-	boolean returnboolean = caught ? false : true;
-	
-	return returnboolean;
+		boolean returnboolean = caught ? false : true;
+		return returnboolean;
     }
 
     /**
@@ -223,21 +200,16 @@ public class ParamUtil {
      */
     public static String buildParamName(String description, int id) {
 	
-
-	StringBuilder sb = new StringBuilder();
-	char[] chars = description.toCharArray();
-	for(char c : chars) {
-	    if(Character.isLetterOrDigit(c)) {
-		sb.append(c);
-	    }
-	    sb.append(id);
-	}
-	    
-
-
-	String returnString = sb.toString();
-	
-	return returnString;
+		StringBuilder sb = new StringBuilder();
+		char[] chars = description.toCharArray();
+		for(char c : chars) {
+		    if(Character.isLetterOrDigit(c)) {
+			sb.append(c);
+		    }
+		    sb.append(id);
+		}
+		String returnString = sb.toString();
+		return returnString;
     }
 
     /**
@@ -248,11 +220,8 @@ public class ParamUtil {
      * @return integer
      */
     public static int getInt(HttpServletRequest request, String paramName) {
-	
-
-	int returnint = getInt(request.getParameter(paramName));
-	
-	return returnint;
+		int returnint = getInt(request.getParameter(paramName));
+		return returnint;
     }
 
     /**
@@ -262,15 +231,11 @@ public class ParamUtil {
      * @return int
      */
     public static int getInt(String param) {
-	
-	int ret = 0;
-
-	if(exists(param) && isInt(param)) {
-	    ret = Integer.parseInt(param);
-	}
-
-	
-	return ret;
+		int ret = 0;
+		if(exists(param) && isInt(param)) {
+		    ret = Integer.parseInt(param);
+		}
+		return ret;
     }
 
     /**
@@ -282,16 +247,12 @@ public class ParamUtil {
      */
     public static float getFloat(HttpServletRequest request, String paramName) {
 	
-
-	float ret = 0;
-
-	String paramStr = request.getParameter(paramName);
-	if(exists(paramStr) && isFloat(paramStr)) {
-	    ret = Float.parseFloat(paramStr);
-	}
-
-	
-	return ret;
+		float ret = 0;
+		String paramStr = request.getParameter(paramName);
+		if(exists(paramStr) && isFloat(paramStr)) {
+		    ret = Float.parseFloat(paramStr);
+		}
+		return ret;
     }
 
     /**
@@ -303,15 +264,12 @@ public class ParamUtil {
      */
     public static Date getDate(HttpServletRequest request, String paramName) {
 	
-
-	Date ret = null;
-
-	String paramStr = request.getParameter(paramName);
-	if(exists(paramStr) && isDate(paramStr)) {
-	    ret = parseDate(paramStr);
-	}
-
-	return ret;
+		Date ret = null;
+		String paramStr = request.getParameter(paramName);
+		if(exists(paramStr) && isDate(paramStr)) {
+		    ret = parseDate(paramStr);
+		}
+		return ret;
     }
 
     /**
@@ -323,28 +281,20 @@ public class ParamUtil {
      */
     public static Timestamp getTimestamp(HttpServletRequest request, String paramName) {
 	
-
-	Timestamp ret = null;
-
-	Date date = getDate(request, paramName);
-	if(date != null) {
-	    ret = new Timestamp(date.getTime());
-	}
-
-	
-	return ret;
+		Timestamp ret = null;
+		Date date = getDate(request, paramName);
+		if(date != null) {
+		    ret = new Timestamp(date.getTime());
+		}
+		return ret;
     }
 
     public static String getString(String string) {
-	
-
-	if(string == null) {
+		if(string == null) {
 	    
-	    return "";
-	}
-	
-
-	return string;
+			return "";
+		}
+		return string;
     }
 
     /**
@@ -355,17 +305,12 @@ public class ParamUtil {
      * @return string
      */
     public static String getString(HttpServletRequest request, String paramName) {
-	
-
-	String ret = "";
-
-	String paramStr = request.getParameter(paramName);
-	if(exists(paramStr)) {
-	    ret = paramStr;
-	}
-
-	
-	return ret;
+			String ret = "";
+			String paramStr = request.getParameter(paramName);
+			if(exists(paramStr)) {
+			    ret = paramStr;
+			}
+			return ret;
     }
 
     /**
@@ -377,21 +322,15 @@ public class ParamUtil {
      */
     public static List<String> getStringArray(HttpServletRequest request, String paramName) {
 	
-
-	List<String> ret = new ArrayList<String>();
-
-	String[] params = request.getParameterValues(paramName);
-	if(params == null) {
-	   
-	    return ret;
-	}
-
-	for(int i = 0; i < params.length; i++) {
-	    ret.add(params[i]);
-	}
-
-	
-	return ret;
+		List<String> ret = new ArrayList<String>();
+		String[] params = request.getParameterValues(paramName);
+		if(params == null) {
+		    return ret;
+		}
+		for(int i = 0; i < params.length; i++) {
+		    ret.add(params[i]);
+		}
+		return ret;
     }
 
     /**
@@ -402,38 +341,26 @@ public class ParamUtil {
      * @return
      */
     public static List<Integer> getIntegerArray(HttpServletRequest request, String paramName) {
-	
-
-	List<Integer> returnList = getIntegerArray(request, paramName, ",");
-	
-	return returnList;
+		List<Integer> returnList = getIntegerArray(request, paramName, ",");
+		return returnList;
     }
 
     public static List<Integer> getIntegerArray(HttpServletRequest request, String paramName,
 	    String delimiter) {
-	
-
-	List<Integer> ret = new ArrayList<Integer>();
-
-	String[] params = request.getParameterValues(paramName);
-
-	if(params == null) {
-	   
-	    return ret;
-	}
-
-	if(params.length == 1 && params[0].indexOf(delimiter) != -1) {
-	    params = params[0].split(delimiter);
-	}
-	
-	for(int i = 0; i < params.length; i++) {
-	    if(isInt(params[i])) {
-		ret.add(Integer.parseInt(params[i]));
-	    }
-	}
-
-	
-	return ret;
+		List<Integer> ret = new ArrayList<Integer>();
+		String[] params = request.getParameterValues(paramName);
+		if(params == null) {
+		    return ret;
+		}
+		if(params.length == 1 && params[0].indexOf(delimiter) != -1) {
+		    params = params[0].split(delimiter);
+		}
+		for(int i = 0; i < params.length; i++) {
+		    if(isInt(params[i])) {
+			ret.add(Integer.parseInt(params[i]));
+		    }
+		}
+		return ret;
     }
 
     /**
@@ -443,11 +370,8 @@ public class ParamUtil {
      * @return
      */
     public static List<Integer> getIntegerArray(String integers) {
-	
-
-	List<Integer> returnList = getIntegerArray(integers, ",");
-	
-	return returnList;
+		List<Integer> returnList = getIntegerArray(integers, ",");
+		return returnList;
     }
 
     /**
@@ -458,21 +382,17 @@ public class ParamUtil {
      * @return
      */
     public static List<Integer> getIntegerArray(String integers, String delimiter) {
-	
-	List<Integer> ret = new ArrayList<Integer>();
-	if(!exists(integers)) {
-	   
-	    return ret;
-	}
-
-	String[] params = integers.split(delimiter);
-	for(int i = 0; i < params.length; i++) {
-	    if(isInt(params[i])) {
-		ret.add(Integer.parseInt(params[i]));
-	    }
-	}
-
-	return ret;
+		List<Integer> ret = new ArrayList<Integer>();
+		if(!exists(integers)) {
+		    return ret;
+		}
+		String[] params = integers.split(delimiter);
+		for(int i = 0; i < params.length; i++) {
+		    if(isInt(params[i])) {
+			ret.add(Integer.parseInt(params[i]));
+		    }
+		}
+		return ret;
     }
     
 }
