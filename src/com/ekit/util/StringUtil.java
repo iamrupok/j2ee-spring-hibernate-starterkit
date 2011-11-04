@@ -22,12 +22,10 @@ public class StringUtil {
      */
     public static String nullToZeroLengthStr(String string) {
 	
-	if(string == null) {
-	    string = "";
-	}
-
-	
-	return string;
+		if(string == null) {
+		    string = "";
+		}
+		return string;
     }
 
     /**
@@ -38,13 +36,10 @@ public class StringUtil {
      * @return double
      */
     public static double roundToDecimals(double d, int c) {
+		int temp = (int) ((d * Math.pow(10, c)));
+		double returndouble = (((double) temp) / Math.pow(10, c));
 	
-
-	int temp = (int) ((d * Math.pow(10, c)));
-
-	double returndouble = (((double) temp) / Math.pow(10, c));
-	
-	return returndouble;
+		return returndouble;
     }
 
     /**
@@ -54,14 +49,12 @@ public class StringUtil {
      * @return String
      */
     public static String stringEsc(String in) {
-	
-	if(in == null)
-	    return "";
-	if(in.compareToIgnoreCase("null") == 0)
-	    return "";
-
-	
-	return in;
+		if(in == null)
+		    return "";
+		if(in.compareToIgnoreCase("null") == 0)
+		    return "";
+			
+		return in;
     }
 
     /**
@@ -74,31 +67,27 @@ public class StringUtil {
      */
     public static String serializeMapOfStrings(Map<String, String> mapOfStrings, String separator,
 	    String terminator) {
-	
-
-	StringBuffer buff = null;
-
-	if(mapOfStrings != null) {
-	    buff = new StringBuffer();
-
-	    if(mapOfStrings.keySet() != null && mapOfStrings.keySet().size() > 0) {
-		Iterator<String> keyIt = mapOfStrings.keySet().iterator();
-
-		while(keyIt.hasNext()) {
-		    buff.append(mapOfStrings.get(keyIt.next()));
-
-		    if(keyIt.hasNext()) {
-			buff.append(separator);
-		    } else {
-			buff.append(terminator);
+		
+    	StringBuffer buff = null;
+		if(mapOfStrings != null) {
+		    buff = new StringBuffer();
+		    if(mapOfStrings.keySet() != null && mapOfStrings.keySet().size() > 0) {
+			Iterator<String> keyIt = mapOfStrings.keySet().iterator();
+				while(keyIt.hasNext()) {
+				    buff.append(mapOfStrings.get(keyIt.next()));
+				    if(keyIt.hasNext()) {
+					buff.append(separator);
+				    } else {
+					buff.append(terminator);
+				    }
+				}
+		    
 		    }
 		}
-	    }
-	}
-
-	String returnString = buff.toString();
 	
-	return returnString;
+		String returnString = buff.toString();
+		
+		return returnString;
     }
 
     /**
@@ -108,11 +97,8 @@ public class StringUtil {
      * @return String
      */
     public static String serializeListOfString(List<String> listOfStrings) {
-	
-
-	String returnString = serializeListOfString(listOfStrings, "");
-	
-	return returnString;
+		String returnString = serializeListOfString(listOfStrings, "");
+		return returnString;
     }
 
     /**
@@ -123,11 +109,8 @@ public class StringUtil {
      * @return String
      */
     public static String serializeListOfString(List<String> listOfStrings, String separator) {
-	
-
-	String returnString = serializeListOfString(listOfStrings, separator, "");
-	
-	return returnString;
+		String returnString = serializeListOfString(listOfStrings, separator, "");
+		return returnString;
     }
 
     /**
@@ -141,29 +124,24 @@ public class StringUtil {
     public static String serializeListOfString(List<String> listOfStrings, String separator,
 	    String terminator) {
 	
-	StringBuffer serializedStrBuff = null;
-
-	if(listOfStrings != null) {
-	    serializedStrBuff = new StringBuffer();
-
-	    if(listOfStrings.size() > 0) {
-		Iterator<String> listIt = listOfStrings.iterator();
-
-		while(listIt.hasNext()) {
-		    serializedStrBuff.append(listIt.next());
-
-		    if(listIt.hasNext()) {
-			serializedStrBuff.append(separator);
-		    } else {
-			serializedStrBuff.append(terminator);
+		StringBuffer serializedStrBuff = null;
+		if(listOfStrings != null) {
+		    serializedStrBuff = new StringBuffer();
+		    if(listOfStrings.size() > 0) {
+			Iterator<String> listIt = listOfStrings.iterator();
+				while(listIt.hasNext()) {
+				    serializedStrBuff.append(listIt.next());
+				    if(listIt.hasNext()) {
+					serializedStrBuff.append(separator);
+				    } else {
+					serializedStrBuff.append(terminator);
+				    }
+				}
 		    }
 		}
-	    }
-	}
-
-	String returnString = serializedStrBuff.toString();
 	
-	return returnString;
+		String returnString = serializedStrBuff.toString();
+		return returnString;
     }
 
     /**
@@ -176,26 +154,23 @@ public class StringUtil {
      */
     public static List<String> deserializeListOfString(String listOfString, String separator,
 	    String terminator) {
-	
 
-	List<String> listOfStrings = null;
-
-	if(listOfString != null && listOfString.length() > 0) {
-	    listOfStrings = new ArrayList<String>();
-	    String[] tokens = listOfString.split(separator);
-
-	    for(String token : tokens) {
-
-		if(token.equals(terminator)) {
-		    break;
-		} else {
-		    listOfStrings.add(token);
-		}
-	    }
-	}
-
-	
-	return listOfStrings;
+	    	List<String> listOfStrings = null;
+		
+			if(listOfString != null && listOfString.length() > 0) {
+			    listOfStrings = new ArrayList<String>();
+			    String[] tokens = listOfString.split(separator);
+		
+			    for(String token : tokens) {
+		
+				if(token.equals(terminator)) {
+				    break;
+				} else {
+				    listOfStrings.add(token);
+				}
+			    }
+			}
+			return listOfStrings;
     }
 
     /**
@@ -209,25 +184,20 @@ public class StringUtil {
     public static String serializeListOfListOfString(List<List<String>> listOfListOfString,
 	    String separator, String terminator) {
 	
-
-	StringBuffer buff = null;
-
-	if(listOfListOfString != null) {
-	    buff = new StringBuffer();
-
-	    if(listOfListOfString.size() > 0) {
-		Iterator<List<String>> llosIt = listOfListOfString.iterator();
-
-		while(llosIt.hasNext()) {
-		    buff.append(StringUtil.serializeListOfString(llosIt.next(), separator,
-			    terminator));
+		StringBuffer buff = null;
+			if(listOfListOfString != null) {
+		    buff = new StringBuffer();
+		    if(listOfListOfString.size() > 0) {
+			Iterator<List<String>> llosIt = listOfListOfString.iterator();
+			while(llosIt.hasNext()) {
+			    buff.append(StringUtil.serializeListOfString(llosIt.next(), separator,
+				    terminator));
+			}
+		    
+		    }
 		}
-	    }
-	}
-
-	String returnString = buff.toString();
-	
-	return returnString;
+		String returnString = buff.toString();
+		return returnString;
     }
 
     /**
@@ -238,20 +208,17 @@ public class StringUtil {
      */
     public static String getCharacterDataFromElement(Element e) {
 	
-
-	if(e == null)
-	    return "";
-	Node child = e.getFirstChild();
-
-	if(child instanceof CharacterData) {
-	    CharacterData cd = (CharacterData) child;
-	    String returnString = cd.getData();
-	  
-	    return returnString;
-	}
-
+		if(e == null)
+		    return "";
+		Node child = e.getFirstChild();
+			if(child instanceof CharacterData) {
+		    CharacterData cd = (CharacterData) child;
+		    String returnString = cd.getData();
+		  
+		    return returnString;
+		}
 	
-	return "";
+		return "";
     }
     
 }

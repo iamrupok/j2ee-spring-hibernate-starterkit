@@ -15,12 +15,10 @@ import com.ekit.security.data.UserDao;
 public class HibernateUserDao implements UserDao {
 
     private HibernateTemplate hibernateTemplate;
-
    
     public void setHibernateTemplate(HibernateTemplate hibernateTemplate) {
 	this.hibernateTemplate = hibernateTemplate;
     }
-
    
     @Transactional(propagation = Propagation.REQUIRED, readOnly = false)
     public void delete(User user) {
@@ -32,9 +30,7 @@ public class HibernateUserDao implements UserDao {
 
     public User get(int userID) {
 	
-
     	User user = (User) hibernateTemplate.get(User.class, userID);
-	
     	return user;
     }
 
@@ -43,7 +39,6 @@ public class HibernateUserDao implements UserDao {
     	Object[] paramArr = new Object[1];
     	paramArr[0] = new String(userName);
     	List<User> users = hibernateTemplate.find("from User where username=?", paramArr);
-
     	if((users != null) && (users.size() > 0)) {
     		User returnUser = users.get(0);
     		
@@ -59,7 +54,6 @@ public class HibernateUserDao implements UserDao {
     	Object[] paramArr = new Object[1];
     	paramArr[0] = new String(email);
     	List<User> users = hibernateTemplate.find("from User where email=?", paramArr);
-
     	if((users != null) && (users.size() > 0)) {
     		User returnUser = users.get(0);
 
@@ -71,34 +65,26 @@ public class HibernateUserDao implements UserDao {
     
     public User get(String username, String password, String site, String domain) {
 	
-	DESEDE desede = new DESEDE(username);
-	Object[] paramArr = new Object[2];
-	paramArr[0] = new String(username);
-	//paramArr[1] = new String(username);
-	paramArr[1] = desede.encrypt(password);
-
-	List<User> users = hibernateTemplate.find("from User where username=? and password=?",
-		paramArr);
-
-	if(users == null || users.size() == 0) {
-	    throw new org.springframework.security.authentication.BadCredentialsException(
-		    "Invalid username / password combination");
-	}
-
-	User returnUser = users.get(0);
+		DESEDE desede = new DESEDE(username);
+		Object[] paramArr = new Object[2];
+		paramArr[0] = new String(username);
+		paramArr[1] = desede.encrypt(password);
+		List<User> users = hibernateTemplate.find("from User where username=? and password=?",
+			paramArr);
+		if(users == null || users.size() == 0) {
+		    throw new org.springframework.security.authentication.BadCredentialsException(
+			    "Invalid username / password combination");
+		}
 	
-	return returnUser;
+		User returnUser = users.get(0);
+		return returnUser;
     }
 
-   
     @Transactional(propagation = Propagation.REQUIRED, readOnly = false)
     public User save(User user) {
 	
-
-	user = (User) hibernateTemplate.merge(user);
-
-	
-	return user;
+		user = (User) hibernateTemplate.merge(user);
+		return user;
     }
     
     public List<User> getAllUsers(){
