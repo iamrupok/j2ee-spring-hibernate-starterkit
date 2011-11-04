@@ -21,35 +21,18 @@ Ext.onReady(function(){
 		autoLoad : true
 	});
 	
-	
+	 var store = new Ext.data.Store({
+				url : "/ekit/employee/LoadEmployeeList.dbv",
+				reader : new Ext.data.JsonReader({
+							root : "employeeList",
+							id : "employeeId",
+							totalProperty : 'totalCount'
+						}, ["employeeId","lastName","firstName","address","country","homePhone","title","reportsTo","edit"]),
+				autoLoad : true
+			});
 			
 	
-	var saveUser = function(oGrid_event){
-		Ext.Ajax.request({
-			waitMsg: 'Please wait...',
-			url: 'SaveUser.dbv',
-			
-			params: {
-				jsonData: Ext.util.JSON.encode(oGrid_event.record.data),
-				saveType: (oGrid_event.record.data.id == "" ) ? "create" : "update"
-			},
-			success: function(response){
-				if(Ext.decode(response.responseText).success == "true"){
-					userDataStore.commitChanges();
-					userDataStore.reload();
-				} else {
-					userDataStore.reload();
-					Ext.MessageBox.alert("Message", "Couldn\'t save user");
-				}
-			},
-			failure: function(response){
-				userDataStore.reload();
-				Ext.MessageBox.alert("Error", "There is a problem for saving user retry later again...");
-			}
-		})
-	}
-	
-	// create the Grid
+	// create the UserGrid
 	var checkBoxSelMod = new Ext.grid.CheckboxSelectionModel();
 	var userListingEditorGrid = new Ext.grid.EditorGridPanel({
 		store : userDataStore,
@@ -67,118 +50,37 @@ Ext.onReady(function(){
 			sortable : true,
 			dataIndex : 'username',
 			align : 'left',
-			editable: true,
-			editor: new Ext.form.TextField({
-				enableKeyEvents: true,
-				listeners: {
-					'specialkey': function(field, e){
-						if(e.getKey() == 9 || e.getKey() == 13) {
-							var itemIndex = userListingEditorGrid.store.indexOf(userListingEditorGrid.getSelectionModel().getSelected())
-							if(userListingEditorGrid.getStore().getAt(itemIndex).get("id")   != ""){
-								userListingEditorGrid.on("afteredit", saveUser);
-							} else {
-								userListingEditorGrid.un("afteredit", saveUser, this);
-								userListingEditorGrid.startEditing(itemIndex,2);
-							}
-						}
-					}
-				}
-			})
+			editable: true
+			
 		},{
 			header: 'Password',
 			dataIndex: 'password',
 			width: 120,
 			readOnly: false,
-			editable: true,
-			editor: new Ext.form.TextField({
-				enableKeyEvents: true,
-				listeners: {
-					'focus' : function(field){
-						this.setValue("");
-					},
-					'specialkey': function(field, e){
-						if(e.getKey() == 9 || e.getKey() == 13) {
-							var itemIndex = userListingEditorGrid.store.indexOf(userListingEditorGrid.getSelectionModel().getSelected())
-							if(userListingEditorGrid.getStore().getAt(itemIndex).get("id") != ""){
-								userListingEditorGrid.on("afteredit", saveUser);
-							} else {
-								userListingEditorGrid.un("afteredit", saveUser, this);
-								userListingEditorGrid.startEditing(itemIndex,3);
-							}
-						}
-					}
-				}
-			})
+			editable: true
+			
 		},{
 			header: "Email",
 			dataIndex: 'email',
 			width: 100,
 			readOnly: false,
-			editable: true,
-			editor: new Ext.form.TextField({
-				enableKeyEvents: true,
-				listeners: {
-					'specialkey': function(field, e){
-						if(e.getKey() == 9 || e.getKey() == 13) {
-							var itemIndex = userListingEditorGrid.store.indexOf(userListingEditorGrid.getSelectionModel().getSelected())
-							if(userListingEditorGrid.getStore().getAt(itemIndex).get("id") != ""){
-								userListingEditorGrid.on("afteredit", saveUser);
-							} else {
-								userListingEditorGrid.un("afteredit", saveUser, this);
-								userListingEditorGrid.startEditing(itemIndex,4);
-							}	
-						}
-					}
-				}
-			})
+			editable: true
 		},{
 			header: "First Name",
 			dataIndex: 'firstName',
 			width: 100,
 			readOnly: false,
-			editable: true,
-			editor: new Ext.form.TextField({
-				enableKeyEvents: true,
-				listeners: {
-					'specialkey': function(field, e){
-						if(e.getKey() == 9 || e.getKey() == 13) {
-							var itemIndex = userListingEditorGrid.store.indexOf(userListingEditorGrid.getSelectionModel().getSelected())
-							if(userListingEditorGrid.getStore().getAt(itemIndex).get("id") != ""){
-								userListingEditorGrid.on("afteredit", saveUser);
-							} else {
-								userListingEditorGrid.un("afteredit", saveUser, this);
-								userListingEditorGrid.startEditing(itemIndex,5);
-							}
-						}
-					}
-				}
-			})
+			editable: true
 		},{
 			header: "Last Name",
 			dataIndex: 'lastName',
 			width: 100,
 			readOnly: false,
-			editable: true,
-			editor: new Ext.form.TextField({
-				enableKeyEvents: true,
-				listeners: {
-					'specialkey': function(field, e){
-						if(e.getKey() == 9 || e.getKey() == 13) {
-							var itemIndex = userListingEditorGrid.store.indexOf(userListingEditorGrid.getSelectionModel().getSelected())
-							if(userListingEditorGrid.getStore().getAt(itemIndex).get("id") != ""){
-								userListingEditorGrid.on("afteredit", saveUser);
-							} else {
-								userListingEditorGrid.un("afteredit", saveUser, this);
-								userListingEditorGrid.startEditing(itemIndex,6);
-							}
-						}
-					}
-				}
-			})
+			editable: true
 		}
 		],
 		stripeRows : true,
-		autoHeight : true,
+		height : 600,
 		layout : 'fit',
 		// config options for stateful behavior
 		stateful : true,
@@ -236,5 +138,110 @@ Ext.onReady(function(){
 	
 	//var addUser = 
 	// render the grid to the specified div in the page
-	userListingEditorGrid.getView().scrollOffset = 0, userListingEditorGrid.render('userManagementGrid');	
+	
+	
+	var checkBoxSelModel = new Ext.grid.CheckboxSelectionModel();
+	var grid = new Ext.grid.GridPanel({
+				store : store,
+				selModel : checkBoxSelModel,
+				columns : [{
+							header : 'FIRST NAME',
+							width : 200,
+							sortable : true,
+							dataIndex : 'firstName',
+							align : 'left'
+						}, {
+							id : 'distributor',
+							header : 'LASTNAME',
+							width : 150,
+							sortable : true,
+							dataIndex : 'lastName',
+							align : 'left'
+						}, {
+							header : 'ADDRESS',
+							width : 100,
+							sortable : true,
+							dataIndex : 'address',
+							align : 'left'
+						}, {
+							header : 'COUNTRY',
+							width : 150,
+							sortable : true,
+							dataIndex : 'country',
+							align : 'left'
+						}, {
+							header : 'HOME PHONE',
+							width : 150,
+							sortable : true,
+							dataIndex : 'homePhone',
+							align : 'left'
+						}, {
+							header : '',
+							width : 150,
+							sortable : true,
+							//renderer:renderView,
+							align : 'left'
+						}],
+
+				stripeRows : true,
+				height : 600,
+				layout : 'fit',
+				// config options for stateful behavior
+				stateful : true,
+				layout : 'fit',
+
+			bbar : new Ext.PagingToolbar({
+			store : store,
+			pageSize : 15,
+			displayInfo : true,
+			displaymsg : 'Displaying {0} - {1} of {2}',
+			emptyMsg : "No records found"
+
+		}),
+		tbar: [{
+			text: "Add User",
+			iconCls: "add",
+			tooltip: "Add a new User",
+			handler: function(){
+				/*if(userListingEditorGrid.getStore().getAt(0).get("id") != ""){
+					var User = userListingEditorGrid.getStore().recordType;
+					var user = new User({
+						id: '',
+						username: '',
+						password: '',
+						email: '',
+						firstName: '',
+						lastName: '',
+						supplierId:'',
+						distributorId:'',
+						userType: ''
+					});
+					userDataStore.insert(0, user);
+					userListingEditorGrid.startEditing(0,1);
+					userListingEditorGrid.getSelectionModel().selectRow(0);
+				} else {
+					userListingEditorGrid.startEditing(0,1);
+				}*/
+            }
+		},'-',{
+			text: "Delete Selection",
+			iconCls: "delete",
+			tooltip: "Delete Selected User"
+			//handler: deleteUser
+		},'-',{
+			text: 'Search',
+			tooltip: 'Advanced Search',
+			//handler: searchUser
+			iconCls:'searchsupliersbtn'
+		}],
+		viewConfig : {
+			forceFit : true
+		}
+
+			});
+
+	// render the grid to the specified div in the page
+	userListingEditorGrid.getView().scrollOffset = 0, userListingEditorGrid.render('userManagementGrid');			
+	grid.getView().scrollOffset = 0, grid.render('employee-historyList');
+
 });
