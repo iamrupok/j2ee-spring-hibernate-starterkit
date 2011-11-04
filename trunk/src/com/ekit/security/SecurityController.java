@@ -2,12 +2,16 @@ package com.ekit.security;
 
 import java.io.IOException;
 import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import org.springframework.web.servlet.ModelAndView;
 
+import com.ekit.util.ParamUtil;
+import com.ekit.util.JSONView;
 import com.ekit.security.DBAuthenticationToken;
 import com.ekit.security.UserDetailsService;
 import com.ekit.security.data.User;
@@ -83,18 +87,14 @@ public class SecurityController extends DBVController {
     @SuppressWarnings("unchecked")
 	public ModelAndView AdminHome(HttpServletRequest request, HttpServletResponse response)
 			throws Exception {
-		if(logger.isDebugEnabled()) {
-		    logger.debug("AdminHome(HttpServletRequest, HttpServletResponse) - start"); 
-		}
+		
 		
 		HashMap adminMap = new HashMap();
 		adminMap.put("PageLink", "Dashboard");
 		adminMap.put("PageTitle", "Administrator-Home");
 		ModelAndView adminHomeModelAndView = new ModelAndView("/security/admin_home", adminMap);
 		
-		if(logger.isDebugEnabled()) {
-		    logger.debug("AdminHome(HttpServletRequest, HttpServletResponse) - end"); 
-		}
+		
 		
 		return adminHomeModelAndView;
 	}
@@ -102,19 +102,39 @@ public class SecurityController extends DBVController {
     @SuppressWarnings("unchecked")
 	public ModelAndView UserHome(HttpServletRequest request, HttpServletResponse response) 
 			throws Exception {
-		if(logger.isDebugEnabled()) {
-		    logger.debug("UserHome(HttpServletRequest, HttpServletResponse) - start"); 
-		}
+		
 		
 		HashMap userMap = new HashMap();
 		userMap.put("PageLink", "users");
 		userMap.put("PageTitle", "Manage-Users");
 		ModelAndView manageUsersModelAndView = new ModelAndView("/security/user_home", userMap);
 		
-		if(logger.isDebugEnabled()) {
-		    logger.debug("UserHome(HttpServletRequest, HttpServletResponse) - end"); 
-		}
+		
 		
 		return manageUsersModelAndView;
+	}
+    
+    @SuppressWarnings("unchecked")
+	public ModelAndView LoadUser(HttpServletRequest request, HttpServletResponse response)
+			throws Exception {
+		
+	    
+	    
+	    String taskType = ParamUtil.getString(request, "task");
+	    HashMap userMap = new HashMap();
+	    
+	    if(taskType.equals("ALL")) {
+	    	int start = (request.getParameter("start") != null) ? ParamUtil.getInt(request, "start") : 0;
+	    	int limit = (request.getParameter("limit") != null) ? ParamUtil.getInt(request, "limit") : 15;
+	    	List<Map<String,Object>> userList = userDetailsService.getAllUsers();	
+			userMap.put( "userList",  userList.subList(start, start + limit > userList.size() ? userList.size() : start + limit));
+			userMap.put( "totalCount",  userList.size());
+	    }
+	    
+		ModelAndView userListModelAndView = new ModelAndView(new JSONView(), userMap);
+		
+	  
+		
+		return userListModelAndView;
 	}
 }
