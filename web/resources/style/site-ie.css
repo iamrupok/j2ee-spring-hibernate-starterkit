@@ -1,0 +1,3 @@
+.topMenu a, .topMenu a:visited {
+	behavior:url(border-radius.htc);
+}
