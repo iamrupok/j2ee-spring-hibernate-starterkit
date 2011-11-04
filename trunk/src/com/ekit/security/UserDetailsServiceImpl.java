@@ -54,7 +54,6 @@ public class UserDetailsServiceImpl implements UserDetailsService {
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException,
 	    DataAccessException {
 	
-    	// TODO Auto-generated method stub
     	return null;
     }
     

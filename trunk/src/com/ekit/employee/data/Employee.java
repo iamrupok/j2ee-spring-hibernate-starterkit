@@ -172,16 +172,6 @@ public class Employee implements SimpleMemberMappable{
 	public void setStatus(String status) {
 		this.status = status;
 	}
-
-		
-	/*public String getEmail() {
-		return email;
-	}
-
-	public void setEmail(String email) {
-		this.email = email;
-	}*/
-
 	public String isActive() {
 		return active;
 	}

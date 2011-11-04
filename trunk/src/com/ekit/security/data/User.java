@@ -15,9 +15,6 @@ import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.GrantedAuthorityImpl;
 import org.springframework.security.core.userdetails.UserDetails;
 
-import com.ekit.security.DESEDE;
-
-
 
 @Entity
 @Table(name = "DB_SECURITY_USER")

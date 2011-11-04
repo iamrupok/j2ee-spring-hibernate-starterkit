@@ -12,11 +12,7 @@ import org.apache.commons.logging.LogFactory;
  * Class for Encrypt and Decrypt a given string by triple-DES Algorithm
  */
 public class DESEDE {
-    /**
-     * Logger for this class
-     */
    
-
     Cipher ecipher;
     Cipher dcipher;
 

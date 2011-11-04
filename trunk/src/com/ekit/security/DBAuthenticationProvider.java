@@ -11,11 +11,7 @@ import com.ekit.security.data.User;
  * authentication
  */
 public class DBAuthenticationProvider implements AuthenticationProvider {
-    /**
-     * Logger for this class
-     */
-   
-
+    
     UserDetailsService userDetailsService;
 
     /**
@@ -67,25 +63,6 @@ public class DBAuthenticationProvider implements AuthenticationProvider {
 	return user;
     }
 
-    /*
-     * public Authentication authenticate(Authentication authentication) {
-     * System.out.println("authenticate"); if
-     * (!supports(authentication.getClass())) { return null; }
-     * 
-     * if (authentication instanceof DBAuthenticationToken) {
-     * DBAuthenticationToken token = (DBAuthenticationToken) authentication;
-     * 
-     * User user = userDetailsService.loadDBUser(token.getUsername(),
-     * token.getPassword(), token.getSite(), token.getDomain()); if (user==null)
-     * return null;
-     * 
-     * DBAuthenticationToken result = new
-     * DBAuthenticationToken(user.getAuthorities(), token.getUsername(),
-     * token.getPassword(), token.getSite(), token.getDomain(), user.getId());
-     * result.setDetails(authentication.getDetails()); return result; } return
-     * null; }
-     */
-
     /**
      * Performs authentication with the same contract as
      * AuthenticationManager.authenticate(Authentication).
@@ -106,28 +83,6 @@ public class DBAuthenticationProvider implements AuthenticationProvider {
 	User user = null;
 
 	user = retrieveUser(username, (DBAuthenticationToken) authentication);
-
-	/*
-	 * preAuthenticationChecks.check(user);
-	 * 
-	 * try { additionalAuthenticationChecks(user,
-	 * (UsernamePasswordAuthenticationToken) authentication); } catch
-	 * (AuthenticationException exception) { if (cacheWasUsed) { // There
-	 * was a problem, so try again after checking // we're using latest data
-	 * (ie not from the cache) cacheWasUsed = false; user =
-	 * retrieveUser(username, (UsernamePasswordAuthenticationToken)
-	 * authentication); additionalAuthenticationChecks(user,
-	 * (UsernamePasswordAuthenticationToken) authentication); } else { throw
-	 * exception; } }
-	 * 
-	 * postAuthenticationChecks.check(user);
-	 * 
-	 * if (!cacheWasUsed) { this.userCache.putUserInCache(user); }
-	 * 
-	 * Object principalToReturn = user;
-	 * 
-	 * if (forcePrincipalAsString) { principalToReturn = user.getUsername(); }
-	 */
 
 	Authentication returnAuthentication = createSuccessAuthentication(
 		(DBAuthenticationToken) authentication, user);

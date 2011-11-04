@@ -460,7 +460,6 @@ public class ParamUtil {
     public static List<Integer> getIntegerArray(String integers, String delimiter) {
 	
 	List<Integer> ret = new ArrayList<Integer>();
-
 	if(!exists(integers)) {
 	   
 	    return ret;
