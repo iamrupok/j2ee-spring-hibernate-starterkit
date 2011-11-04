@@ -23,30 +23,25 @@ input[type=text], input[type=password], input.text, input.title, textarea, selec
     top: 7px !important;
 }
 </style>
-  <div class="content">
-  
+ <div class="content">
   	 <div class="breadCrumb"> <a href="AdminHome.dbv">Home</a> <span class="seperator"></span>Dashboard
       <div class="topRightButton">
-        <input name="Submit" type="submit" class="buttonsBlue  btn-new-draft" title="Create Employee" value="Create User"   onclick="MM_goToURL('parent','CreateNewUser.dbv');return document.MM_returnValue" />
+        
       </div>
     </div>
-    
     <div class="on-time-estimate"  style="visibility:hidden;">
     <span>
     	on time estimates <strong>60%</strong>
     	
     	</span> 
     </div>
-    
-   
-   <br class="clear" />
-   
-    <div id="userManagementGrid"">	 
-	</div>    
-    
     <br class="clear" />
-
+    <div class="dashboardPanel" style="margin-right: 5px;" id="userManagementGrid"> </div>
+    <div class="dashboardPanel" style="float: left;" id="employee-historyList"> </div>
+    <br class="clear" />
+   
+  </div>
   
    <script type="text/javascript" src="../security/admin_home.js"></script>   
-   </div>
+  
 <#include "../template/footer.ftl">
