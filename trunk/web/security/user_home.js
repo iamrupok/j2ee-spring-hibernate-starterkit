@@ -74,7 +74,7 @@ Ext.onReady(function() {
 						}],
 
 				stripeRows : true,
-				height : _LIST_PAGE_HEIGHT_GLOBAL,
+				height : 600,
 				layout : 'fit',
 				// config options for stateful behavior
 				stateful : true,
