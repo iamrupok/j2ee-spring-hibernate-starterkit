@@ -41,6 +41,30 @@ Ext.onReady(function(){
 				autoLoad : true
 			});
 			
+	var saveUser = function(oGrid_event){
+		Ext.Ajax.request({
+			waitMsg: 'Please wait...',
+			//url: 'SaveUser.dbv',
+			
+			params: {
+				jsonData: Ext.util.JSON.encode(oGrid_event.record.data),
+				saveType: (oGrid_event.record.data.id == "" ) ? "create" : "update"
+			},
+			success: function(response){
+				if(Ext.decode(response.responseText).success == "true"){
+					userDataStore.commitChanges();
+					userDataStore.reload();
+				} else {
+					userDataStore.reload();
+					Ext.MessageBox.alert("Message", "Couldn\'t save user");
+				}
+			},
+			failure: function(response){
+				userDataStore.reload();
+				Ext.MessageBox.alert("Error", "There is a problem for saving user retry later again...");
+			}
+		})
+	}
 	
 	// create the UserGrid
 	var checkBoxSelMod = new Ext.grid.CheckboxSelectionModel();
@@ -60,33 +84,116 @@ Ext.onReady(function(){
 			sortable : true,
 			dataIndex : 'username',
 			align : 'left',
-			editable: true
-			
+			editable: true,
+			editor: new Ext.form.TextField({
+				enableKeyEvents: true,
+				listeners: {
+					'specialkey': function(field, e){
+						if(e.getKey() == 9 || e.getKey() == 13) {
+							var itemIndex = userListingEditorGrid.store.indexOf(userListingEditorGrid.getSelectionModel().getSelected())
+							if(userListingEditorGrid.getStore().getAt(itemIndex).get("id")   != ""){
+								userListingEditorGrid.on("afteredit", saveUser);
+							} else {
+								userListingEditorGrid.un("afteredit", saveUser, this);
+								userListingEditorGrid.startEditing(itemIndex,2);
+							}
+						}
+					}
+				}
+			})
+					
 		},{
 			header: 'Password',
 			dataIndex: 'password',
 			width: 120,
 			readOnly: false,
-			editable: true
-			
-		},{
+			editable: true,
+			editor: new Ext.form.TextField({
+				enableKeyEvents: true,
+				listeners: {
+					'specialkey': function(field, e){
+						if(e.getKey() == 9 || e.getKey() == 13) {
+							var itemIndex = userListingEditorGrid.store.indexOf(userListingEditorGrid.getSelectionModel().getSelected())
+							if(userListingEditorGrid.getStore().getAt(itemIndex).get("id")   != ""){
+								userListingEditorGrid.on("afteredit", saveUser);
+							} else {
+								userListingEditorGrid.un("afteredit", saveUser, this);
+								userListingEditorGrid.startEditing(itemIndex,3);
+							}
+						}
+					}
+				}
+			})
+					
+		}	,{
 			header: "Email",
 			dataIndex: 'email',
 			width: 100,
 			readOnly: false,
-			editable: true
+			editable: true,
+			editor: new Ext.form.TextField({
+				enableKeyEvents: true,
+				listeners: {
+					'specialkey': function(field, e){
+						if(e.getKey() == 9 || e.getKey() == 13) {
+							var itemIndex = userListingEditorGrid.store.indexOf(userListingEditorGrid.getSelectionModel().getSelected())
+							if(userListingEditorGrid.getStore().getAt(itemIndex).get("id")   != ""){
+								userListingEditorGrid.on("afteredit", saveUser);
+							} else {
+								userListingEditorGrid.un("afteredit", saveUser, this);
+								userListingEditorGrid.startEditing(itemIndex,4);
+							}
+						}
+					}
+				}
+			})
+					
 		},{
 			header: "First Name",
 			dataIndex: 'firstName',
 			width: 100,
 			readOnly: false,
-			editable: true
+			editable: true,
+			editor: new Ext.form.TextField({
+				enableKeyEvents: true,
+				listeners: {
+					'specialkey': function(field, e){
+						if(e.getKey() == 9 || e.getKey() == 13) {
+							var itemIndex = userListingEditorGrid.store.indexOf(userListingEditorGrid.getSelectionModel().getSelected())
+							if(userListingEditorGrid.getStore().getAt(itemIndex).get("id")   != ""){
+								userListingEditorGrid.on("afteredit", saveUser);
+							} else {
+								userListingEditorGrid.un("afteredit", saveUser, this);
+								userListingEditorGrid.startEditing(itemIndex,5);
+							}
+						}
+					}
+				}
+			})
+					
 		},{
 			header: "Last Name",
 			dataIndex: 'lastName',
 			width: 100,
 			readOnly: false,
-			editable: true
+			editable: true,
+			editor: new Ext.form.TextField({
+				enableKeyEvents: true,
+				listeners: {
+					'specialkey': function(field, e){
+						if(e.getKey() == 9 || e.getKey() == 13) {
+							var itemIndex = userListingEditorGrid.store.indexOf(userListingEditorGrid.getSelectionModel().getSelected())
+							if(userListingEditorGrid.getStore().getAt(itemIndex).get("id")   != ""){
+								userListingEditorGrid.on("afteredit", saveUser);
+							} else {
+								userListingEditorGrid.un("afteredit", saveUser, this);
+								userListingEditorGrid.startEditing(itemIndex,6);
+							}
+						}
+					}
+				}
+			})
+					
 		}
 		],
 			stripeRows : true,
@@ -157,33 +264,123 @@ Ext.onReady(function(){
 							width : 200,
 							sortable : true,
 							dataIndex : 'firstName',
-							align : 'left'
-						}, {
+							align : 'left',
+							editable: true,
+							editor: new Ext.form.TextField({
+							enableKeyEvents: true,
+								listeners: {
+									'specialkey': function(field, e){
+										if(e.getKey() == 9 || e.getKey() == 13) {
+											var itemIndex = employeeGrid.store.indexOf(employeeGrid.getSelectionModel().getSelected())
+											if(employeeGrid.getStore().getAt(itemIndex).get("employeeId")   != ""){
+												employeeGrid.on("afteredit", saveEmployee);
+											} else {
+												employeeGrid.un("afteredit", saveEmployee, this);
+												employeeGrid.startEditing(itemIndex,2);
+											}
+										}
+									}
+								}
+							})
+									
+						}	, {
 							id : 'distributor',
 							header : 'LASTNAME',
 							width : 150,
 							sortable : true,
 							dataIndex : 'lastName',
-							align : 'left'
+							align : 'left',
+							editable: true,
+							editor: new Ext.form.TextField({
+							enableKeyEvents: true,
+								listeners: {
+									'specialkey': function(field, e){
+										if(e.getKey() == 9 || e.getKey() == 13) {
+											var itemIndex = employeeGrid.store.indexOf(employeeGrid.getSelectionModel().getSelected())
+											if(employeeGrid.getStore().getAt(itemIndex).get("employeeId")   != ""){
+												employeeGrid.on("afteredit", saveEmployee);
+											} else {
+												employeeGrid.un("afteredit", saveEmployee, this);
+												employeeGrid.startEditing(itemIndex,3);
+											}
+										}
+									}
+								}
+							})
+									
 						}, {
 							header : 'ADDRESS',
 							width : 100,
 							sortable : true,
 							dataIndex : 'address',
-							align : 'left'
+							align : 'left',
+							editable: true,
+							editor: new Ext.form.TextField({
+							enableKeyEvents: true,
+								listeners: {
+									'specialkey': function(field, e){
+										if(e.getKey() == 9 || e.getKey() == 13) {
+											var itemIndex = employeeGrid.store.indexOf(employeeGrid.getSelectionModel().getSelected())
+											if(employeeGrid.getStore().getAt(itemIndex).get("employeeId")   != ""){
+												employeeGrid.on("afteredit", saveEmployee);
+											} else {
+												employeeGrid.un("afteredit", saveEmployee, this);
+												employeeGrid.startEditing(itemIndex,4);
+											}
+										}
+									}
+								}
+							})
+									
 						}, {
 							header : 'COUNTRY',
 							width : 150,
 							sortable : true,
 							dataIndex : 'country',
-							align : 'left'
+							align : 'left',editable: true,
+							editor: new Ext.form.TextField({
+							enableKeyEvents: true,
+								listeners: {
+									'specialkey': function(field, e){
+										if(e.getKey() == 9 || e.getKey() == 13) {
+											var itemIndex = employeeGrid.store.indexOf(employeeGrid.getSelectionModel().getSelected())
+											if(employeeGrid.getStore().getAt(itemIndex).get("employeeId")   != ""){
+												employeeGrid.on("afteredit", saveEmployee);
+											} else {
+												employeeGrid.un("afteredit", saveEmployee, this);
+												employeeGrid.startEditing(itemIndex,5);
+											}
+										}
+									}
+								}
+							})
+									
 						}, {
 							header : 'HOME PHONE',
 							width : 150,
 							sortable : true,
 							dataIndex : 'homePhone',
-							align : 'left'
-						}],
+							align : 'left',
+							editable: true,
+							editor: new Ext.form.TextField({
+							enableKeyEvents: true,
+								listeners: {
+									'specialkey': function(field, e){
+										if(e.getKey() == 9 || e.getKey() == 13) {
+											var itemIndex = employeeGrid.store.indexOf(employeeGrid.getSelectionModel().getSelected())
+											if(employeeGrid.getStore().getAt(itemIndex).get("employeeId")   != ""){
+												employeeGrid.on("afteredit", saveEmployee);
+											} else {
+												employeeGrid.un("afteredit", saveEmployee, this);
+												employeeGrid.startEditing(itemIndex,6);
+											}
+										}
+									}
+								}
+							})
+									
+						}
+						],
 
 			stripeRows : true,
 			height : 200,
