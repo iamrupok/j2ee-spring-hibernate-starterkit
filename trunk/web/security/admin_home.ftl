@@ -25,23 +25,14 @@ input[type=text], input[type=password], input.text, input.title, textarea, selec
 </style>
  <div class="content">
   	 <div class="breadCrumb"> <a href="AdminHome.dbv">Home</a> <span class="seperator"></span>Dashboard
-      <div class="topRightButton">
-        
       </div>
-    </div>
-    <div class="on-time-estimate"  style="visibility:hidden;">
-    <span>
-    	on time estimates <strong>60%</strong>
-    	
-    	</span> 
-    </div>
     <br class="clear" />
     <div class="dashboardPanel" style="margin-right: 5px;" id="userManagementGrid"> </div>
-    <div class="dashboardPanel" style="float: left;" id="employee-historyList"> </div>
     <br class="clear" />
+    <div class="dashboardPanel" style="margin-right: 5px;" id="employee-historyList"></div>
+	  <br class="clear" />
    
-  </div>
-  
+  </div>  
    <script type="text/javascript" src="../security/admin_home.js"></script>   
   
 <#include "../template/footer.ftl">

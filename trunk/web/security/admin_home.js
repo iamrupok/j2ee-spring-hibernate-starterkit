@@ -80,7 +80,8 @@ Ext.onReady(function(){
 		}
 		],
 		stripeRows : true,
-		height : 600,
+			//width: 465,
+			//height: 250,
 		layout : 'fit',
 		// config options for stateful behavior
 		stateful : true,
@@ -184,7 +185,8 @@ Ext.onReady(function(){
 						}],
 
 				stripeRows : true,
-				height : 600,
+				width: 465,
+				height: 250,
 				layout : 'fit',
 				// config options for stateful behavior
 				stateful : true,
@@ -241,7 +243,41 @@ Ext.onReady(function(){
 			});
 
 	// render the grid to the specified div in the page
-	userListingEditorGrid.getView().scrollOffset = 0, userListingEditorGrid.render('userManagementGrid');			
-	grid.getView().scrollOffset = 0, grid.render('employee-historyList');
+			
+			var panel1 = new Ext.Panel({
+			renderTo : 'userManagementGrid',
+			width : 937,
+			defaults : {
+				height : 250,
+				collapsible : true,
+				border : false,
+				titleCollapse : true
+			},
+			items : [
+				new Ext.Panel({
+					title : 'Last RFQs',
+					items : [userListingEditorGrid]
+				})
+			]
+		});
+			var panel1 = new Ext.Panel({
+			renderTo : 'employee-historyList',
+			width : 937,
+			defaults : {
+				height : 250,
+				collapsible : true,
+				border : false,
+				titleCollapse : true
+			},
+			items : [
+				new Ext.Panel({
+					title : 'Last RFQs',
+					items : [grid]
+				})
+			]
+		});
+		
+	//userListingEditorGrid.getView().scrollOffset = 0, userListingEditorGrid.render('userManagementGrid');			
+	//grid.getView().scrollOffset = 0, grid.render('employee-historyList');
 
 });
