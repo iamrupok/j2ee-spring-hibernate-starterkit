@@ -21,13 +21,23 @@ Ext.onReady(function(){
 		autoLoad : true
 	});
 	
-	 var store = new Ext.data.Store({
+	 var employeeDataStore = new Ext.data.Store({
 				url : "/ekit/employee/LoadEmployeeList.dbv",
 				reader : new Ext.data.JsonReader({
 							root : "employeeList",
 							id : "employeeId",
 							totalProperty : 'totalCount'
-						}, ["employeeId","lastName","firstName","address","country","homePhone","title","reportsTo","edit"]),
+						}, [
+								{name:'employeeId',type:'int',mapping:'employeeId'},
+								{name:'lastName',type:'string',mapping:'lastName'},
+								{name:'firstName',type:'string',mapping:'firstName'},
+								{name:'address',type:'string',mapping:'address'},
+								{name:'country',type:'string',mapping:'country'},
+								{name:'homePhone',type:'string',mapping:'homePhone'},
+								{name:'title',type:'string',mapping:'title'},
+								{name:'reportsTo',type:'string',mapping:'reportsTo'}
+								
+							]),
 				autoLoad : true
 			});
 			
@@ -79,14 +89,11 @@ Ext.onReady(function(){
 			editable: true
 		}
 		],
-		stripeRows : true,
-			//width: 465,
-			//height: 250,
-		layout : 'fit',
-		// config options for stateful behavior
-		stateful : true,
-		layout : 'fit',
-
+			stripeRows : true,
+			height : 200,
+			stateful : true,
+			autoScroll : true,
+			layout : 'fit',
 		bbar : new Ext.PagingToolbar({
 			store : userDataStore,
 			pageSize : 15,
@@ -137,14 +144,14 @@ Ext.onReady(function(){
 
 	});
 	
-	//var addUser = 
-	// render the grid to the specified div in the page
+
 	
 	
 	var checkBoxSelModel = new Ext.grid.CheckboxSelectionModel();
-	var grid = new Ext.grid.GridPanel({
-				store : store,
+	var employeeGrid = new Ext.grid.GridPanel({
+				store : employeeDataStore,
 				selModel : checkBoxSelModel,
+				clicksToEdit: 2,
 				columns : [{
 							header : 'FIRST NAME',
 							width : 200,
@@ -176,24 +183,15 @@ Ext.onReady(function(){
 							sortable : true,
 							dataIndex : 'homePhone',
 							align : 'left'
-						}, {
-							header : '',
-							width : 150,
-							sortable : true,
-							//renderer:renderView,
-							align : 'left'
 						}],
 
-				stripeRows : true,
-				width: 465,
-				height: 250,
-				layout : 'fit',
-				// config options for stateful behavior
-				stateful : true,
-				layout : 'fit',
-
+			stripeRows : true,
+			height : 200,
+			stateful : true,
+			autoScroll : true,
+			layout : 'fit',
 			bbar : new Ext.PagingToolbar({
-			store : store,
+			store : employeeDataStore,
 			pageSize : 15,
 			displayInfo : true,
 			displaymsg : 'Displaying {0} - {1} of {2}',
@@ -201,29 +199,29 @@ Ext.onReady(function(){
 
 		}),
 		tbar: [{
-			text: "Add User",
+			text: "Add Employee",
 			iconCls: "add",
-			tooltip: "Add a new User",
+			tooltip: "Add a new Employee",
 			handler: function(){
-				/*if(userListingEditorGrid.getStore().getAt(0).get("id") != ""){
-					var User = userListingEditorGrid.getStore().recordType;
-					var user = new User({
-						id: '',
-						username: '',
-						password: '',
-						email: '',
-						firstName: '',
+				if(employeeGrid.getStore().getAt(0).get("employeeId") != ""){
+					var Employee = employeeGrid.getStore().recordType;
+					var employee = new Employee({
+						employeeId: '',
 						lastName: '',
-						supplierId:'',
-						distributorId:'',
-						userType: ''
+						firstName: '',
+						address: '',
+						country: '',
+						homePhone: '',
+						title:'',
+						reportsTo:''
+					
 					});
-					userDataStore.insert(0, user);
-					userListingEditorGrid.startEditing(0,1);
-					userListingEditorGrid.getSelectionModel().selectRow(0);
+					employeeDataStore.insert(0, employee);
+					employeeGrid.startEditing(0,1);
+					employeeGrid.getSelectionModel().selectRow(0);
 				} else {
-					userListingEditorGrid.startEditing(0,1);
-				}*/
+					employeeGrid.startEditing(0,1);
+				}         
             }
 		},'-',{
 			text: "Delete Selection",
@@ -242,7 +240,7 @@ Ext.onReady(function(){
 
 			});
 
-	// render the grid to the specified div in the page
+
 			
 			var panel1 = new Ext.Panel({
 			renderTo : 'userManagementGrid',
@@ -255,12 +253,12 @@ Ext.onReady(function(){
 			},
 			items : [
 				new Ext.Panel({
-					title : 'Last RFQs',
+					title : 'User',
 					items : [userListingEditorGrid]
 				})
 			]
 		});
-			var panel1 = new Ext.Panel({
+			var panel2 = new Ext.Panel({
 			renderTo : 'employee-historyList',
 			width : 937,
 			defaults : {
@@ -271,13 +269,12 @@ Ext.onReady(function(){
 			},
 			items : [
 				new Ext.Panel({
-					title : 'Last RFQs',
-					items : [grid]
+					title : 'Employee',
+					items : [employeeGrid]
 				})
 			]
 		});
 		
-	//userListingEditorGrid.getView().scrollOffset = 0, userListingEditorGrid.render('userManagementGrid');			
-	//grid.getView().scrollOffset = 0, grid.render('employee-historyList');
+	
 
 });
