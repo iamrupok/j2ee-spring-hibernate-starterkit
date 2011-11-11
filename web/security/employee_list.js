@@ -20,7 +20,31 @@ Ext.onReady(function(){
 				autoLoad : true
 			});
 			
-		
+		var saveEmployee = function(oGrid_event){
+		Ext.Ajax.request({
+			waitMsg: 'Please wait...',
+			url: 'SaveUser.dbv',
+			
+			params: {
+				jsonData: Ext.util.JSON.encode(oGrid_event.record.data),
+				saveType: (oGrid_event.record.data.id == "" ) ? "create" : "update"
+			},
+			success: function(response){
+				if(Ext.decode(response.responseText).success == "true"){
+					employeeDataStore.commitChanges();
+					employeeDataStore.reload();
+				} else {
+					employeeDataStore.reload();
+					Ext.MessageBox.alert("Message", "Couldn\'t save user");
+				}
+			},
+			failure: function(response){
+				employeeDataStore.reload();
+				Ext.MessageBox.alert("Error", "There is a problem for saving user retry later again...");
+			}
+		})
+	}
+	
 	var checkBoxSelModel = new Ext.grid.CheckboxSelectionModel();
 	var employeeGrid = new Ext.grid.EditorGridPanel({
 				store : employeeDataStore,
