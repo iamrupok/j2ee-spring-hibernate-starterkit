@@ -9,6 +9,12 @@ ul.holder {
 	height: 1%;
 	padding: 4px 5px 0;
 }
+ul.holder_customer{
+	border: 1px solid #A8A8A8;
+    height: 20px !important;
+    overflow: hidden;
+    padding: 1px 5px 0;
+}
 *:first-child+html ul.holder {
 	padding-bottom: 2px;
 }
@@ -55,7 +61,7 @@ ul.holder {
 /*	width: 500px;
 */}
 ul.holder {
-	margin: 0 !important
+	margin: 7px !important;
 }
 ul.holder li.bit-box, #apple-list ul.holder li.bit-box {
 	padding-right: 15px;
@@ -93,11 +99,96 @@ ul.holder li.bit-box-focus a.closebutton, ul.holder li.bit-box-focus a.closebutt
 }
 /* Autocompleter */
 
+
+
+/**
+dsfdsf
+*/
+
+
+ul.holder_customer li {
+	float: left;
+	list-style-type: none;
+	margin: 0 5px 4px 0;
+	white-space:nowrap;
+}
+ul.holder_customer li.bit-input input {
+	width:160px !important;
+}
+
+ul.holder_customer li.bit-box{
+}
+ul.holder_customer li.bit-box {
+	-moz-border-radius: 6px;
+	-webkit-border-radius: 6px;
+	border-radius: 6px;
+	border: 1px solid #CAD8F3;
+	background: #DEE7F8;
+	padding: 1px 5px 2px;
+}
+ul.holder_customer li.bit-box-focus {
+	border-color: #598BEC;
+	background: #598BEC;
+}
+ul.holder_customer li.bit-input input {
+	width: auto;
+	overflow:visible;
+	margin: 0;
+	border: 0px;
+	outline: 0;
+	padding: 3px 0px 2px;
+} /* no left/right padding here please */
+ul.holder_customer li.bit-input input.smallinput {
+	width: 20px;
+}
+/* Facebook demo CSS */      
+ul.holder_customer {
+/*	width: 500px;
+*/}
+ul.holder_customer {
+	margin: 7px 0 !important;
+}
+ul.holder_customer li.bit-box, #apple-list ul.holder_customer li.bit-box {
+	padding-right: 15px;
+	position: relative;
+	z-index:1000;
+}
+#apple-list ul.holder_customer li.bit-input {
+	margin: 0;
+}
+#apple-list ul.holder_customer li.bit-input input.smallinput {
+	width: 5px;
+}
+ul.holder_customer li.bit-hover {
+	background: #ebeeef;
+	border: 1px solid #6D95E0;
+}
+ul.holder_customer li.bit-box-focus {
+	background: #ebeeef;
+}
+ul.holder_customer li.bit-box a.closebutton {
+	position: absolute;
+	right: 4px;
+	top: 5px;
+	display: block;
+	width: 7px;
+	height: 7px;
+	font-size: 1px;
+	background: url('close.gif');
+}
+ul.holder_customer li.bit-box a.closebutton:hover {
+	background-position: 7px;
+}
+ul.holder_customer li.bit-box-focus a.closebutton, ul.holder_customer li.bit-box-focus a.closebutton:hover {
+	background-position: bottom;
+}
+
+/***/
+
 .facebook-auto {
-	display: none; /*position: absolute*/
-	;
-	width: 512px;
-	z-index:1001;
+	display: none;
+	position: absolute;
+	z-index:9;
 }
 .facebook-auto .default {
 	padding: 5px 7px;
@@ -112,7 +203,6 @@ ul.holder li.bit-box-focus a.closebutton, ul.holder li.bit-box-focus a.closebutt
 	padding: 0;
 	overflow: auto;
 	border:1px solid #B9C2CB;
-	width:355px !important;
 }
 .facebook-auto ul li {
 	background-color:#F6F9FA;
