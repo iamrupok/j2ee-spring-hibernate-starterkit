@@ -23,7 +23,6 @@
     
     <br class="clear" />
 
-  
-   <script type="text/javascript" src="../security/user_home.js"></script>  
-   </div>
+  </div>
+     <script type="text/javascript" src="../security/user_home.js"></script>  
 <#include "../template/footer.ftl">
