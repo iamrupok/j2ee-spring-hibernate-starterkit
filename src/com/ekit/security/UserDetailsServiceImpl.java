@@ -57,7 +57,13 @@ public class UserDetailsServiceImpl implements UserDetailsService {
     	return null;
     }
     
-	public ArrayList<Map<String, Object>> getAllUsers() {
+    public void deleteUser(int userID){
+    	
+    	User deleteUser=userDao.get(userID);
+    	userDao.delete(deleteUser);
+    }
+	
+    public ArrayList<Map<String, Object>> getAllUsers() {
 		
 		
 		List<User> userList = userDao.getAllUsers();
@@ -69,7 +75,7 @@ public class UserDetailsServiceImpl implements UserDetailsService {
     		userMap = new HashMap<String,Object>();
     		userMap.put("id", user.getId());
     		userMap.put("username", user.getUsername() == null ? null : user.getUsername().toString());
-    		userMap.put("password", user.getPassword() == null ? null : user.getPassword());
+    		userMap.put("password", user.getPassword() == null ? null : user.getDecryptPassword());
     		userMap.put("email", user.getEmail() == null ? null : user.getEmail().toString());
     		userMap.put("firstName", user.getFirstName() == null ? null : user.getFirstName().toString());
     		userMap.put("lastName", user.getLastName() == null ? null : user.getLastName().toString());
