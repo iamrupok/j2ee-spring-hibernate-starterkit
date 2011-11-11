@@ -63,7 +63,7 @@ Ext.onReady(function(){
 		id:"userListingEditorGrid",
 		selModel : checkBoxSelMod,
 		clicksToEdit: 2,
-		height : 550,
+		
 		columns : [
 		{
 			dataIndex: 'id',
@@ -228,7 +228,7 @@ Ext.onReady(function(){
 		
 		],
 			stripeRows : true,
-			height : 200,
+			height : 500,
 			stateful : true,
 			autoScroll : true,
 			layout : 'fit',
