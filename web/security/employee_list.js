@@ -22,12 +22,18 @@ Ext.onReady(function(){
 			
 		
 	var checkBoxSelModel = new Ext.grid.CheckboxSelectionModel();
-	var employeeGrid = new Ext.grid.GridPanel({
+	var employeeGrid = new Ext.grid.EditorGridPanel({
 				store : employeeDataStore,
+				id:"employeeDataStore",
 				selModel : checkBoxSelModel,
 				clicksToEdit: 2,
-				height : 550,
+				
 				columns : [{
+								dataIndex: 'employeeId',
+								header: "ID",
+								width: 50
+							},
+							{
 							header : 'FIRST NAME',
 							width : 200,
 							sortable : true,
@@ -151,7 +157,7 @@ Ext.onReady(function(){
 						],
 
 			stripeRows : true,
-			height : 200,
+			height : 500,
 			stateful : true,
 			autoScroll : true,
 			layout : 'fit',
