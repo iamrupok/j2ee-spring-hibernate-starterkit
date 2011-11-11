@@ -9,7 +9,7 @@ body {
 	margin-top:66px;
 }
 .headerTop .logo {
-	background-image: url(http://174.143.89.49/projects/DHS/demandbridge/dbc/images/sourcing-bench-logo.png);
+	background-image: url(../images/sourcing-bench-logo.png);
 	height: 15px;
 	width: 120px;
 	background-repeat: no-repeat;
@@ -31,7 +31,7 @@ body {
 	margin-bottom:-23px;
 }
 .headerTop .utility-menu .btn-new-draft {
-	background-image: url(http://174.143.89.49/projects/DHS/demandbridge/dbc/images/btn-blue-bright.png);
+	background-image: url(../images/btn-blue-bright.png);
 	border:1px solid #DBE6ED;
 	color:#4F7F9D;
 	display:inline-block;
@@ -41,7 +41,7 @@ body {
 	text-transform:uppercase;
 }
 .headerTop .utility-menu .btn-new-draft:hover {
-	background-image: url(http://174.143.89.49/projects/DHS/demandbridge/dbc/images/btn-blue-bright-hover.png);
+	background-image: url(../images/btn-blue-bright-hover.png);
 	border-color:#a6d0e7;
 }
 .frontBody {
@@ -60,7 +60,7 @@ body {
 .topMenu a, .topMenu a:visited {
 	font-size: 12px;
 	color: #35393a;
-	background-image: url(http://174.143.89.49/projects/DHS/demandbridge/dbc/images/top-menu-bg-normal.png);
+	background-image: url(../images/top-menu-bg-normal.png);
 	text-align: center;
 	float: left;
 	text-decoration: none;
@@ -80,11 +80,11 @@ body {
 	font-weight:bold;
 }
 .selectedItem {
-	background-image: url(http://174.143.89.49/projects/DHS/demandbridge/dbc/images/top-menu-bg-select.png);
+	background-image: url(../images/top-menu-bg-select.png);
 	color: #FFF;
 }
 .topMenu .selectedItem {
-	background-image: url(http://174.143.89.49/projects/DHS/demandbridge/dbc/images/top-menu-bg-select.png) !important;
+	background-image: url(../images/top-menu-bg-select.png) !important;
 	color: #FFF !important;
 }
 .topMenu .seperator {
@@ -98,7 +98,7 @@ body {
 .topMenuSub a {
 	color: #dde3e4;
 	text-transform: uppercase;
-	background-image: url(http://174.143.89.49/projects/DHS/demandbridge/dbc/images/topMenuSub-bg.png);
+	background-image: url(../images/topMenuSub-bg.png);
 	background-repeat: repeat-x;
 	padding:4px 12px;
 	text-decoration: none;
@@ -111,7 +111,7 @@ body {
  *display: inline;
 }
 .topMenuSub a:hover, .topMenuSub .selectedItem {
-	background-image: url(http://174.143.89.49/projects/DHS/demandbridge/dbc/images/topMenuSub-bg-hover.png) !important;
+	background-image: url(../images/topMenuSub-bg-hover.png) !important;
 	color:#FFF;
 }
 .topMenuSub .seperator {
@@ -145,7 +145,7 @@ body {
 	color: #2c2c2c;
 }
 .breadCrumb .seperator {
-	background-image: url(http://174.143.89.49/projects/DHS/demandbridge/dbc/images/bc-seperator.png);
+	background-image: url(../images/bc-seperator.png);
 	background-repeat: no-repeat;
 	height: 7px;
 	width: 7px;
@@ -224,11 +224,11 @@ body {
 	font-weight: bold;
 }
 .itemList .parentItem, .itemList .childItem {
-	background-image: url(http://174.143.89.49/projects/DHS/demandbridge/dbc/images/legend-bg-parent.png);
+	background-image: url(../images/legend-bg-parent.png);
 	border: 1px solid #e6e5e3;
 }
 .itemList .childItem {
-	background-image: url(http://174.143.89.49/projects/DHS/demandbridge/dbc/images/legend-bg-child.png);
+	background-image: url(../images/legend-bg-child.png);
 	border: 1px solid #e6e5e3;
 	font-size: 10px;
     margin-bottom: 5px;
@@ -327,7 +327,7 @@ body {
 	float: left;
 }
 .tab {
-	background-image: url(http://174.143.89.49/projects/DHS/demandbridge/dbc/images/panel-tab-bg.png);
+	background-image: url(../images/panel-tab-bg.png);
 	background-repeat: repeat-x;
 	text-decoration: none;
 	display: block;
@@ -335,7 +335,7 @@ body {
 	cursor:pointer;
 }
 .tab:hover {
-	background-image: url(http://174.143.89.49/projects/DHS/demandbridge/dbc/images/panel-tab-bg-hover.png);
+	background-image: url(../images/panel-tab-bg-hover.png);
 }
 .tab .tab-title {
 	color:#726051;
@@ -363,7 +363,7 @@ body {
 	text-transform:uppercase;
 }
 .open {
-	background-image: url(http://174.143.89.49/projects/DHS/demandbridge/dbc/images/panel-ico-open.png);
+	background-image: url(../images/panel-ico-open.png);
 	background-repeat: no-repeat;
 	height: 10px;
 	width: 10px;
@@ -372,7 +372,7 @@ body {
 	margin-left: 6px;
 }
 .closed {
-	background-image: url(http://174.143.89.49/projects/DHS/demandbridge/dbc/images/panel-ico-closed.png);
+	background-image: url(../images/panel-ico-closed.png);
 	background-repeat: no-repeat;
 	height: 10px;
 	width: 10px;
@@ -381,7 +381,7 @@ body {
 	margin-left: 6px;
 }
 .panelContent, .popup-regular {
-	background-image: url(http://174.143.89.49/projects/DHS/demandbridge/dbc/images/panelContent-bg.png);
+	background-image: url(../images/panelContent-bg.png);
 	background-repeat: repeat-y;
 	display: block;
 	border: 1px solid #eeeeee;
@@ -412,7 +412,7 @@ body {
 	cursor:pointer;
 }
 .buttons {
-	background-image: url(http://174.143.89.49/projects/DHS/demandbridge/dbc/images/btn-bg.png);
+	background-image: url(../images/btn-bg.png);
 	border: 1px solid #eeeeee;
 	color: #3a3a3a;
 }
@@ -422,19 +422,19 @@ body {
 	color: #fff;
 }
 /*.btn-new-draft {
-	background-image: url(http://174.143.89.49/projects/DHS/demandbridge/dbc/images/btn-exclusive.png);
+	background-image: url(../images/btn-exclusive.png);
 	border: 1px solid #6c8201;
 	font-size:10px !important;
 	position:relative;
 	top:5px;
 }
 .btn-new-draft:hover, .btn-new-draft:focus {
-	background-image: url(http://174.143.89.49/projects/DHS/demandbridge/dbc/images/btn-exclusive-hover.png) !important;
+	background-image: url(../images/btn-exclusive-hover.png) !important;
 	border: 1px solid #7d9701 !important;
 }*/
 
 .btn-new-draft {
-	background-image: url(http://174.143.89.49/projects/DHS/demandbridge/dbc/images/btn-blue-bright.png);
+	background-image: url(../images/btn-blue-bright.png);
 	border:1px solid #00AEEF;
 	font-size:10px !important;
 	font-weight:bold;
@@ -446,7 +446,7 @@ body {
 	behavior:url(border-radius.htc);
 }
 .btn-new-draft:hover, .btn-new-draft:focus {
-	background-image: url(http://174.143.89.49/projects/DHS/demandbridge/dbc/images/btn-blue-bright-hover.png) !important;
+	background-image: url(../images/btn-blue-bright-hover.png) !important;
 	border: 1px solid #00b9ff !important;
 }
 .newItem {
@@ -454,16 +454,16 @@ body {
 	font-weight:bold;
 }
 .buttons:hover, .buttons:focus {
-	background-image: url(http://174.143.89.49/projects/DHS/demandbridge/dbc/images/btn-bg-hover.png);
+	background-image: url(../images/btn-bg-hover.png);
 }
 .buttonsBlue:hover, .buttonsBlue:focus, .newItem:focus {
-	background-image: url(http://174.143.89.49/projects/DHS/demandbridge/dbc/images/btn-blue-hover.png);
+	background-image: url(../images/btn-blue-hover.png);
 }
 .leftArea .typAheadBox {
 	width: 380px;
 }
 .help {
-	background-image: url(http://174.143.89.49/projects/DHS/demandbridge/dbc/images/ico-help.png);
+	background-image: url(../images/ico-help.png);
 	height: 13px;
 	width: 13px;
 	background-repeat: no-repeat;
@@ -518,7 +518,7 @@ body {
 	visibility:visible;
 }
 .frontBody .main {
-	background-image: url(http://174.143.89.49/projects/DHS/demandbridge/dbc/images/front-bg-top.png);
+	background-image: url(../images/front-bg-top.png);
 	background-repeat: repeat-x;
 	background-color: #909698;
 	margin: auto;
@@ -543,7 +543,7 @@ body {
 	width: 433px;
 }
 .frontBody .main .wrapper .right .log-on {
-	background-image: url(http://174.143.89.49/projects/DHS/demandbridge/dbc/images/dbc-logon.png);
+	background-image: url(../images/dbc-logon.png);
 	width: 394px;
 	float: right;
 	background-repeat: no-repeat;
@@ -631,7 +631,7 @@ body {
 .projectInfoEstimateDueDate {
 }
 .projectInfoEstimateDueDate .ico-cal {
-	background-image:url(http://174.143.89.49/projects/DHS/demandbridge/dbc/images/ico-calander.png);
+	background-image:url(../images/ico-calander.png);
 	background-repeat:no-repeat;
 	display:inline-block;
 	height:22px;
@@ -641,7 +641,7 @@ body {
 	width:19px;
 }
 .projectInfoEstimateDueDate .ico-cal:hover {
-	background-image:url(http://174.143.89.49/projects/DHS/demandbridge/dbc/images/ico-calander-hover.png);
+	background-image:url(../images/ico-calander-hover.png);
 }
 .projectInfoEstimateDueDate label {
 	display:block;
@@ -747,7 +747,7 @@ body {
 	padding-bottom: 2px;
 }
 .type-ahead-hint .hint-indicator {
-	background-image:url(http://174.143.89.49/projects/DHS/demandbridge/dbc/images/right-arrow-blue.png);
+	background-image:url(../images/right-arrow-blue.png);
 	background-repeat: no-repeat;
 	float: left;
 	margin-right: 15px;
@@ -849,7 +849,7 @@ body {
 	padding-bottom: 2px;
 }
 .type-ahead-hint .hint-indicator {
-	background-image:url(http://174.143.89.49/projects/DHS/demandbridge/dbc/images/right-arrow-blue.png);
+	background-image:url(../images/right-arrow-blue.png);
 	background-repeat: no-repeat;
 	float: left;
 	margin-right: 15px;
@@ -958,13 +958,13 @@ width:96% !important;
 
 
 .add {
-	background-image:url(http://174.143.89.49/projects/DHS/demandbridge/dbc/images/drop-add.gif) !important;
+	background-image:url(../images/drop-add.gif) !important;
 }
 .delete {
-	background-image:url(http://174.143.89.49/projects/DHS/demandbridge/dbc/images/delete.gif) !important;
+	background-image:url(../images/delete.gif) !important;
 }
 .edit {
-	background-image:url(http://174.143.89.49/projects/DHS/demandbridge/dbc/images/form_edit.png) !important;
+	background-image:url(../images/form_edit.png) !important;
 }
 
 .disabled-menu-item, .disabled-menu-item:hover, .disabled-menu-item:focus {

@@ -132,3 +132,17 @@ form.inline p {
 	font-weight:normal;
 	text-transform:uppercase;
 	font-size:12px;}
+.PAGEMINHEIGHT
+{
+  min-height:350px;
+}
+
+.dbc-rfq-current-input-box-focus {
+	border-color: black !important;
+	background-color: #FFFFF3 !important;
+}
+
+.dbc-rfq-current-input-sub-box-focus {
+	border-color: black !important;
+	background-color: #F9FBA4 !important;
+}
