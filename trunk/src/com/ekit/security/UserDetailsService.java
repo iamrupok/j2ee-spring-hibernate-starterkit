@@ -13,5 +13,6 @@ public interface UserDetailsService extends	org.springframework.security.core.us
     public User save(User user);
     public User loadDBUser(String username, String password, String site, String domain);       
     public ArrayList<Map<String, Object>> getAllUsers();
-
+    public void deleteUser(int userID);
+    
 }

@@ -15,6 +15,10 @@ import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.GrantedAuthorityImpl;
 import org.springframework.security.core.userdetails.UserDetails;
 
+import com.ekit.security.DESEDE;
+
+
+
 
 @Entity
 @Table(name = "DB_SECURITY_USER")
@@ -145,6 +149,17 @@ public class User  implements UserDetails {
 		return true;
 	    }
 	
+	public String getDecryptPassword() {
+    	String password = getPassword();
+    	String username = getUsername();
+    	if (password != null && username != null) {
+    		DESEDE desede = new DESEDE(username);
+    		password = desede.decrypt(password);
+    		return password;
+    	}
+    	
+    	return null;
+    }
 	
 }
 

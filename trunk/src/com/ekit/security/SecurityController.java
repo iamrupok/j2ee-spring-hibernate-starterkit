@@ -1,6 +1,8 @@
 package com.ekit.security;
 
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -8,7 +10,10 @@ import java.util.Map;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import org.json.JSONObject;
 import org.springframework.web.servlet.ModelAndView;
+
+
 
 import com.ekit.util.ParamUtil;
 import com.ekit.util.JSONView;
@@ -115,6 +120,25 @@ public class SecurityController extends DBVController {
 	}
     
     @SuppressWarnings("unchecked")
+    public ModelAndView UserList(HttpServletRequest request, HttpServletResponse response)
+    throws Exception {
+    		HashMap model = new HashMap();
+    		model.put("PageLink", "User");
+    		model.put("PageTitle", "Users");
+    		ModelAndView returnModelAndView = new ModelAndView("/security/user_list", model);
+    		return returnModelAndView;
+    }
+    
+    @SuppressWarnings("unchecked")
+    public ModelAndView EmployeeList(HttpServletRequest request, HttpServletResponse response)
+    throws Exception {
+    		HashMap model = new HashMap();
+    		model.put("PageLink", "Employee");
+    		model.put("PageTitle", "Employees");
+    		ModelAndView returnModelAndView = new ModelAndView("/security/employee_list", model);
+    		return returnModelAndView;
+    }
+    @SuppressWarnings("unchecked")
 	public ModelAndView LoadUser(HttpServletRequest request, HttpServletResponse response)
 			throws Exception {
 		
@@ -123,12 +147,29 @@ public class SecurityController extends DBVController {
 	    String taskType = ParamUtil.getString(request, "task");
 	    HashMap userMap = new HashMap();
 	    
+	    int start = (request.getParameter("start") != null) ? ParamUtil.getInt(request, "start") : 0;
+    	int limit = (request.getParameter("limit") != null) ? ParamUtil.getInt(request, "limit") : 15;
+    	List<Map<String,Object>> userList = userDetailsService.getAllUsers();
+    	
 	    if(taskType.equals("ALL")) {
-	    	int start = (request.getParameter("start") != null) ? ParamUtil.getInt(request, "start") : 0;
-	    	int limit = (request.getParameter("limit") != null) ? ParamUtil.getInt(request, "limit") : 15;
-	    	List<Map<String,Object>> userList = userDetailsService.getAllUsers();	
+	    		
 			userMap.put( "userList",  userList.subList(start, start + limit > userList.size() ? userList.size() : start + limit));
 			userMap.put( "totalCount",  userList.size());
+	    }
+	    else
+	    {
+	    		ArrayList<Map<String, Object>> list1 = new ArrayList<Map<String, Object>>();
+	    		for(int i = 0; i < userList.size(); i++) {
+	    			
+	    			if(((String) userList.get(i).get("username")).toUpperCase().startsWith(taskType.toUpperCase())
+	    					|| ((String) userList.get(i).get("username")).toUpperCase().endsWith(taskType.toUpperCase()))
+	    				list1.add(userList.get(i));
+	    		}
+	    		
+	    		userMap.put("userList", list1.subList(start, start + limit > list1.size() ? list1.size() : start
+	    				+ limit));
+	    		userMap.put("totalCount", list1.size());
+	    	
 	    }
 	    
 		ModelAndView userListModelAndView = new ModelAndView(new JSONView(), userMap);
@@ -137,4 +178,79 @@ public class SecurityController extends DBVController {
 		
 		return userListModelAndView;
 	}
+    
+    public ModelAndView SaveUser(HttpServletRequest request, HttpServletResponse response)
+	throws Exception {
+
+		 
+		
+		String jsonData = ParamUtil.getString(request, "jsonData");
+		
+		JSONObject jsonObject = new JSONObject(jsonData);
+		HashMap userMap = new HashMap();
+		
+		User securityUser = null;
+		
+		if(ParamUtil.getString(request, "saveType").equals("create")) {
+			try {
+				
+				securityUser=new User();
+				securityUser.setFirstName((String)jsonObject.get("firstName"));
+				securityUser.setLastName((String)jsonObject.get("lastName"));
+				securityUser.setUsername((String)jsonObject.get("username"));
+				securityUser.setEmail((String)jsonObject.get("email"));
+				securityUser.setUserType((String)jsonObject.get("userType"));
+				DESEDE encodepwd=new DESEDE((String)jsonObject.get("username"));
+				securityUser.setPassword(encodepwd.encrypt((String)jsonObject.get("password")));
+				
+				
+				userDetailsService.save(securityUser);
+				userMap.put("success", "true");
+			    
+			} catch(Exception ex) {
+				userMap.put("failure", "true");
+			}
+		} else {
+			try {
+			   
+				securityUser =userDetailsService.getUser(Integer.parseInt(jsonObject.get("id").toString()));
+				//securityUser=new User();
+				securityUser.setFirstName((String)jsonObject.get("firstName"));
+				securityUser.setLastName((String)jsonObject.get("lastName"));
+				securityUser.setUsername((String)jsonObject.get("username"));
+				securityUser.setEmail((String)jsonObject.get("email"));
+				securityUser.setUserType((String)jsonObject.get("userType"));
+				DESEDE encodepwd=new DESEDE((String)jsonObject.get("username"));
+				securityUser.setPassword(encodepwd.encrypt((String)jsonObject.get("password")));
+				userDetailsService.save(securityUser);
+							    
+			    userMap.put("success", "true");
+			} catch(Exception ex) {
+				userMap.put("failure", "true");
+			}
+		}
+		
+		ModelAndView userSaveModelAndView = new ModelAndView(new JSONView(), userMap);
+		
+		return userSaveModelAndView;
+		}
+    
+    public ModelAndView DeleteUser(HttpServletRequest request, HttpServletResponse response)
+	throws Exception {
+		
+		HashMap deleteUserMap = new HashMap();
+		
+		try {
+			 
+			userDetailsService.deleteUser(ParamUtil.getInt(request, "id"));
+			deleteUserMap.put("success", "true");
+		} catch(Exception ex) {
+			deleteUserMap.put("failure", "true");
+		}
+		
+		ModelAndView userDeleteModelAndView = new ModelAndView(new JSONView(), deleteUserMap);
+		
+		return userDeleteModelAndView;
+		}
+
 }
