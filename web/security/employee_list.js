@@ -23,11 +23,11 @@ Ext.onReady(function(){
 		var saveEmployee = function(oGrid_event){
 		Ext.Ajax.request({
 			waitMsg: 'Please wait...',
-			url: 'SaveUser.dbv',
+			url: '/ekit/employee/SaveEmployee.dbv',
 			
 			params: {
 				jsonData: Ext.util.JSON.encode(oGrid_event.record.data),
-				saveType: (oGrid_event.record.data.id == "" ) ? "create" : "update"
+				saveType: (oGrid_event.record.data.employeeId == "" ) ? "create" : "update"
 			},
 			success: function(response){
 				if(Ext.decode(response.responseText).success == "true"){
@@ -80,7 +80,6 @@ Ext.onReady(function(){
 									}
 								}
 							})
-									
 						}	, {
 							id : 'distributor',
 							header : 'LASTNAME',
@@ -169,8 +168,8 @@ Ext.onReady(function(){
 											if(employeeGrid.getStore().getAt(itemIndex).get("employeeId")   != ""){
 												employeeGrid.on("afteredit", saveEmployee);
 											} else {
-												employeeGrid.un("afteredit", saveEmployee, this);
-												employeeGrid.startEditing(itemIndex,6);
+												employeeGrid.on("afteredit", saveEmployee);
+												//employeeGrid.startEditing(itemIndex,5);
 											}
 										}
 									}
@@ -179,7 +178,6 @@ Ext.onReady(function(){
 									
 						}
 						],
-
 			stripeRows : true,
 			height : 500,
 			stateful : true,
@@ -235,8 +233,6 @@ Ext.onReady(function(){
 
 			});
 
-
-	
 			var panel = new Ext.Panel({
 			renderTo : 'employee-List',
 			width : 937,
@@ -254,6 +250,4 @@ Ext.onReady(function(){
 			]
 		});
 		
-	
-
 });
