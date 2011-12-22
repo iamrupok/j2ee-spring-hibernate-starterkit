@@ -195,7 +195,7 @@ Ext.onReady(function(){
 			editor: new Ext.form.ComboBox({
 				store : new Ext.data.ArrayStore({
 					fields : ['typeId', 'typeText'],
-					data : [["User",	'User'],["Admin",	'Administrator']]
+					data : [["User",	'User'],["Admin",	'Admin']]
 				}),
 				hiddenName : 'xmlType',
 				valueField : 'typeText',
