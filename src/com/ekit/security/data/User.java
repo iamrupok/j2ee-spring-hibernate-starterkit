@@ -101,7 +101,12 @@ public class User  implements UserDetails {
 	}
 	
 	public void setPassword(String password) {
-		this.password = password;
+		if(this.getUsername()!=null && password!=null)
+		{
+			DESEDE encodepwd=new DESEDE(this.getUsername());
+			this.password = encodepwd.encrypt(password);
+		
+		}
 	}
 	
 	public Collection<GrantedAuthority> getAuthorities() {
