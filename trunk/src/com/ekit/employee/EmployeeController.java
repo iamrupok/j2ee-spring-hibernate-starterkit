@@ -18,6 +18,7 @@ import com.ekit.util.ParamUtil;
 
 import com.ekit.security.UserDetailsService;
 import com.ekit.util.DBVController;
+import com.ekit.admin.AdminService;
 import com.ekit.employee.data.Employee;
 
 public class EmployeeController extends DBVController{
@@ -25,6 +26,7 @@ public class EmployeeController extends DBVController{
 	
 	private UserDetailsService userDetailsService;
 	private EmployeeService employeeService;
+	private AdminService adminService;
 	
 	public void setUserDetailsService(UserDetailsService userDetailsService) {
 		this.userDetailsService = userDetailsService;
@@ -32,7 +34,16 @@ public class EmployeeController extends DBVController{
 	public void setEmployeeService(EmployeeService employeeService) {
 		this.employeeService = employeeService;
 	}
-	
+	public void setAdminService(AdminService adminService) {
+		this.adminService = adminService;
+	}
+	public ModelAndView GetCountries(HttpServletRequest request, HttpServletResponse response) throws Exception {
+
+		HashMap model = new HashMap();
+		model.put("countries", adminService.getAllCountriesMapList());
+		ModelAndView returnModelAndView = new ModelAndView(new JSONView(), model);
+		return returnModelAndView;
+	}
 	public ModelAndView LoadEmployeeList(HttpServletRequest request, HttpServletResponse response) throws Exception {
 	
 		int start = (request.getParameter("start") != null) ? Integer.parseInt(request.getParameter("start")) : 0;
@@ -100,7 +111,21 @@ public class EmployeeController extends DBVController{
 		ModelAndView userSaveModelAndView = new ModelAndView(new JSONView(), userMap);
 		return userSaveModelAndView;
 		}
-
+	 public ModelAndView DeleteEmployee(HttpServletRequest request, HttpServletResponse response)
+		throws Exception {
+		HashMap deleteUserMap = new HashMap();
+		try {
+				 
+			employeeService.deleteEmployee(ParamUtil.getInt(request, "employeeId"));
+			deleteUserMap.put("success", "true");
+		} catch(Exception ex) {
+			deleteUserMap.put("failure", "true");
+		}
+			
+		ModelAndView userDeleteModelAndView = new ModelAndView(new JSONView(), deleteUserMap);
+		return userDeleteModelAndView;
+	}
+		
 	
 
 }
