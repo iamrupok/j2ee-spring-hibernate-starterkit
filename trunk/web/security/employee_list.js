@@ -1,5 +1,17 @@
 Ext.onReady(function(){
 
+	var countryStore = new Ext.data.JsonStore({
+	    	autoLoad: true,
+	    	storeId: 'countryStore',  
+	        url: '/ekit/employee/GetCountries.dbv',
+	        root: 'countries',	        
+	        fields:[
+	  			{name:'id', type:'string'},
+	  			{name:'name', type:'string'},
+	  			{name:'isoCode', type:'string'}
+	  		]
+	    }); 
+	    
 	var employeeDataStore = new Ext.data.Store({
 				url : "/ekit/employee/LoadEmployeeList.dbv",
 				reader : new Ext.data.JsonReader({
@@ -44,6 +56,7 @@ Ext.onReady(function(){
 			}
 		})
 	}
+	
 	
 	var checkBoxSelModel = new Ext.grid.CheckboxSelectionModel();
 	var employeeGrid = new Ext.grid.EditorGridPanel({
@@ -135,18 +148,34 @@ Ext.onReady(function(){
 							sortable : true,
 							dataIndex : 'country',
 							align : 'left',editable: true,
-							editor: new Ext.form.TextField({
+							editor: new Ext.form.ComboBox({
+							store :countryStore,
+							hiddenName : 'xmlType',
+							valueField : 'name',
+							displayField : 'name',
+							emptyText : 'Please select user type...',
+							triggerAction : 'all',
+							width : 115,
+							hideTrigger : false,
+							editable : false,
+							mode : 'local',
 							enableKeyEvents: true,
-								listeners: {
-									'specialkey': function(field, e){
+							listeners: {'specialkey': function(field, e){
 										if(e.getKey() == 9 || e.getKey() == 13) {
-											var itemIndex = employeeGrid.store.indexOf(employeeGrid.getSelectionModel().getSelected())
-											if(employeeGrid.getStore().getAt(itemIndex).get("employeeId")   != ""){
-												employeeGrid.on("afteredit", saveEmployee);
-											} else {
-												employeeGrid.un("afteredit", saveEmployee, this);
-												employeeGrid.startEditing(itemIndex,5);
-											}
+											employeeGrid.on("afteredit", saveEmployee);
+											var itemIndex = employeeGrid.store.indexOf(employeeGrid.getSelectionModel().getSelected()) + 1;
+											employeeGrid.getSelectionModel().selectRow(itemIndex);
+											employeeGrid.startEditing(itemIndex,1);
+										}
+									},
+									'blur': function(field, e){
+										var itemIndex = employeeGrid.store.indexOf(employeeGrid.getSelectionModel().getSelected())
+										if(employeeGrid.getStore().getAt(itemIndex).get("employeeId")   != "")
+										{
+											employeeGrid.on("afteredit", saveEmployee);
+											var itemIndex = employeeGrid.store.indexOf(employeeGrid.getSelectionModel().getSelected()) + 1;
+											employeeGrid.getSelectionModel().selectRow(itemIndex);
+											employeeGrid.startEditing(itemIndex,1);
 										}
 									}
 								}
@@ -219,12 +248,35 @@ Ext.onReady(function(){
 		},'-',{
 			text: "Delete Selection",
 			iconCls: "delete",
-			tooltip: "Delete Selected User"
-			//handler: deleteUser
+			tooltip: "Delete Selected Employee",
+			handler:  function(){
+				var itemIndex = employeeGrid.store.indexOf(employeeGrid.getSelectionModel().getSelected())
+				if(employeeGrid.getStore().getAt(itemIndex).get("employeeId")   != ""){
+				Ext.Ajax.request({
+					waitMsg: 'Please wait...',
+					url: '/ekit/employee/DeleteEmployee.dbv',
+					params: {
+							employeeId: eval(employeeGrid.getStore().getAt(itemIndex).get("employeeId"))
+							},
+					success: function(response){
+							if(Ext.decode(response.responseText).success == "true"){
+								employeeDataStore.commitChanges();
+								employeeDataStore.reload();
+							} else {
+								employeeDataStore.reload();
+								Ext.MessageBox.alert("Message", "Couldn\'t delete Employee");
+							}
+						},
+						failure: function(response){
+							employeeDataStore.reload();
+							Ext.MessageBox.alert("Error", "There is a problem for deleting Employee retry later again...");
+						}
+					})
+				}
+			}
 		},'-',{
 			text: 'Search',
 			tooltip: 'Advanced Search',
-			//handler: searchUser
 			iconCls:'searchsupliersbtn'
 		}],
 		viewConfig : {

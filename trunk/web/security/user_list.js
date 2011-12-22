@@ -47,14 +47,6 @@ Ext.onReady(function(){
 		})
 	}
 	
-	var deleteUser = function(oGrid_event){
-		if(oGrid_event.record.data.id != "")
-		{
-			alert(oGrid_event.record.data.id);
-		}
-		
-	}
-	
 	
 	// create the UserGrid
 	var checkBoxSelMod = new Ext.grid.CheckboxSelectionModel();
