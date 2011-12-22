@@ -2,7 +2,6 @@ package com.ekit.security;
 
 import java.io.IOException;
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -13,14 +12,11 @@ import javax.servlet.http.HttpServletResponse;
 import org.json.JSONObject;
 import org.springframework.web.servlet.ModelAndView;
 
-
-
-import com.ekit.util.ParamUtil;
-import com.ekit.util.JSONView;
-import com.ekit.security.DBAuthenticationToken;
-import com.ekit.security.UserDetailsService;
+import com.ekit.employee.data.Employee;
 import com.ekit.security.data.User;
 import com.ekit.util.DBVController;
+import com.ekit.util.JSONView;
+import com.ekit.util.ParamUtil;
 
 public class SecurityController extends DBVController {
   
@@ -181,16 +177,11 @@ public class SecurityController extends DBVController {
     
     public ModelAndView SaveUser(HttpServletRequest request, HttpServletResponse response)
 	throws Exception {
-
-		 
-		
+ 
 		String jsonData = ParamUtil.getString(request, "jsonData");
-		
 		JSONObject jsonObject = new JSONObject(jsonData);
 		HashMap userMap = new HashMap();
-		
 		User securityUser = null;
-		
 		if(ParamUtil.getString(request, "saveType").equals("create")) {
 			try {
 				
@@ -200,10 +191,9 @@ public class SecurityController extends DBVController {
 				securityUser.setUsername((String)jsonObject.get("username"));
 				securityUser.setEmail((String)jsonObject.get("email"));
 				securityUser.setUserType((String)jsonObject.get("userType"));
-				DESEDE encodepwd=new DESEDE((String)jsonObject.get("username"));
-				securityUser.setPassword(encodepwd.encrypt((String)jsonObject.get("password")));
-				
-				
+				securityUser.setPassword((String)jsonObject.get("password"));
+				//DESEDE encodepwd=new DESEDE((String)jsonObject.get("username"));
+				//securityUser.setPassword(encodepwd.encrypt((String)jsonObject.get("password")));
 				userDetailsService.save(securityUser);
 				userMap.put("success", "true");
 			    
@@ -231,15 +221,12 @@ public class SecurityController extends DBVController {
 		}
 		
 		ModelAndView userSaveModelAndView = new ModelAndView(new JSONView(), userMap);
-		
 		return userSaveModelAndView;
 		}
     
     public ModelAndView DeleteUser(HttpServletRequest request, HttpServletResponse response)
 	throws Exception {
-		
 		HashMap deleteUserMap = new HashMap();
-		
 		try {
 			 
 			userDetailsService.deleteUser(ParamUtil.getInt(request, "id"));
@@ -249,8 +236,7 @@ public class SecurityController extends DBVController {
 		}
 		
 		ModelAndView userDeleteModelAndView = new ModelAndView(new JSONView(), deleteUserMap);
-		
 		return userDeleteModelAndView;
 		}
-
+    
 }
