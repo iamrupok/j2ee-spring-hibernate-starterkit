@@ -41,6 +41,7 @@
 	    	<list>
 	    		<value>com.ekit.employee.data.Employee</value>		
 	    		<value>com.ekit.security.data.User</value>
+	    		<value>com.ekit.admin.data.Country</value>
     		
 	    	</list>
 	    </property>
@@ -63,11 +64,14 @@
 	</bean>
 	
 	<bean id="employeeService"  class="com.ekit.employee.EmployeeServiceImpl">
-		
 		  <property name="employeeDao" ref="employeeDao" />
-				  
 	</bean>   	
 
+	<bean id="adminService" 
+	      class="com.ekit.admin.AdminServiceImpl">
+	      <property name="countryDao" ref="countryDao" />
+	
+	</bean>	
 	<bean id="freemarkerConfig"
 		class="org.springframework.web.servlet.view.freemarker.FreeMarkerConfigurer">
 		<property name="templateLoaderPath">
@@ -108,7 +112,9 @@
 		class="com.ekit.security.UserDetailsServiceImpl">
 		<property name="userDao" ref="userDao" />
 	</bean>
-	      	
+	<bean id="countryDao" class="com.ekit.admin.data.db.HibernateCountryDao">
+	      <property name="jpaTemplate" ref="jpaTemplate" />
+	</bean>      	
 	
 	
 </beans>

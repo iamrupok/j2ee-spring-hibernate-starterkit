@@ -11,6 +11,8 @@
 	<bean id="employeeController" class="com.ekit.employee.EmployeeController">
     	<property name="userDetailsService" ref="userService"/>
     	<property name="employeeService" ref="employeeService"/>
+    	<property name="adminService" ref="adminService"/>
+    	
 	</bean>
 	
 	<bean id="securityController" class="com.ekit.security.SecurityController">
